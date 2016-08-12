@@ -6,17 +6,17 @@
 #    By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/01/11 11:38:13 by fhuang            #+#    #+#              #
-#    Updated: 2016/08/12 15:40:26 by fhuang           ###   ########.fr        #
+#    Updated: 2016/08/12 16:09:23 by fhuang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = checker
+NAME = push_swap
 
 CC = gcc
 
 CFLAGS = -Wall -Werror -Wextra
 
-SRC_NAME = checker.c follow_instruc.c main.c
+SRC_NAME = main.c push_swap.c
 
 SRC = $(SCR_NAME)
 

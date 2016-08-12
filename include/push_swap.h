@@ -6,15 +6,18 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/11 14:19:13 by fhuang            #+#    #+#             */
-/*   Updated: 2016/08/11 20:23:01 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/08/12 15:37:34 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/include/libft.h"
-#include <unistd.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/uio.h>
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
+
+# include "../libft/include/libft.h"
+# include <unistd.h>
+# include <stdlib.h>
+# include <sys/types.h>
+# include <sys/uio.h>
 
 
 #include <stdio.h>
@@ -36,6 +39,8 @@ typedef struct		s_game
 **			LIST_MOVES
 */
 
+int					check_param(char **av);
+void				init_game(t_game *game, int ac, char **av);
 void		print(t_pile *pile);
 void		printrev(t_pile *pile);
 void				push(t_pile **dest, t_pile **src);
@@ -51,3 +56,5 @@ void				swap(t_pile **pile);
 
 void				follow_instruc(t_game *game, char *instruc);
 void 				checker(t_game *game);
+
+#endif

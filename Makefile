@@ -6,7 +6,7 @@
 #    By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/01/11 11:38:13 by fhuang            #+#    #+#              #
-#    Updated: 2016/08/11 18:48:57 by fhuang           ###   ########.fr        #
+#    Updated: 2016/08/12 16:51:42 by fhuang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ all: #$(NAME)
 #$(NAME): $(OBJ) $(SRC)
 #	@echo "----------------------------MINISHELL----------------------------"
 	@$(MAKE) -C libft
-	@$(MAKE) -C SRC/list_moves
+	@$(MAKE) -C SRC/gameplay
 	@$(MAKE) -C SRC/checker
 #	@$(CC) $(LIBFT_PATH) $(LIBFT) $^ -o $@	#$^ for $(OBJ) and $@ for $(NAME)
 
@@ -54,6 +54,8 @@ $(OBJ_PATH)%.o : $(SRC_PATH)%.c
 clean:
 	@rm -rf $(OBJ_PATH)
 	@$(MAKE) clean -C libft
+	@$(MAKE) clean -C SRC/gameplay
+	@$(MAKE) clean -C SRC/checker
 
 fclean: clean
 	@rm -f $(NAME)

@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 11:48:08 by fhuang            #+#    #+#             */
-/*   Updated: 2016/08/11 17:47:22 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/08/12 15:19:40 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ int				ft_tolower(int c);
 */
 
 int				ft_atoi(const char *str);
+long			ft_atol(const char *str);
 int				ft_atoi_base(const char *str, int base);
 size_t			ft_count_words(const char *s, char c);
 size_t			ft_strlen(char const *s);

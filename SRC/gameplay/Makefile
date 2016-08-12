@@ -6,17 +6,17 @@
 #    By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/01/11 11:38:13 by fhuang            #+#    #+#              #
-#    Updated: 2016/08/11 19:37:58 by fhuang           ###   ########.fr        #
+#    Updated: 2016/08/12 16:54:15 by fhuang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = liblist.a
+NAME = libgame.a
 
 CC = gcc
 
 CFLAGS = -Wall -Werror -Wextra
 
-SRC_NAME = add.c reverse.c rotate.c print.c push.c swap.c
+SRC_NAME = add.c game_start.c reverse.c rotate.c print.c push.c swap.c
 
 SRC = $(SCR_NAME)
 
@@ -50,7 +50,6 @@ $(OBJ_PATH)%.o : %.c
 #$(CFLAGS)
 clean:
 	@rm -rf $(OBJ_PATH)
-	@$(MAKE) clean -C libft
 
 fclean: clean
 	@rm -f $(NAME)

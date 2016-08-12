@@ -1,35 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/25 10:53:44 by fhuang            #+#    #+#             */
-/*   Updated: 2016/08/12 15:26:47 by fhuang           ###   ########.fr       */
+/*   Created: 2016/08/12 15:28:29 by fhuang            #+#    #+#             */
+/*   Updated: 2016/08/12 15:38:59 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-int		ft_atoi(const char *str)
+int			main(int ac, char **av)
 {
-	int			res;
-	const char	*ptr;
-	int			negatif;
+	t_game		game;
 
-	res = 0;
-	ptr = str;
-	while (*ptr && ft_isspace(*ptr))
-		ptr++;
-	negatif = *ptr == '-' ? -1 : 1;
-	if (*ptr == '-' || *ptr == '+')
-		ptr++;
-	while (*ptr && ft_isdigit(*ptr))
+	if (ac > 1)
 	{
-		res *= 10;
-		res += negatif * (*ptr - '0');
-		ptr++;
+		if (check_param(av))
+		{
+			ft_putendl_fd("Error", 2);
+			return (1);
+		}
+		init_game(&game, ac, av);
+		push_swap(&game);
 	}
-	return (res);
+	return (0);
 }
