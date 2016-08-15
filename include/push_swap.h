@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/11 14:19:13 by fhuang            #+#    #+#             */
-/*   Updated: 2016/08/12 15:37:34 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/08/15 18:08:54 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,12 @@
 # include <sys/types.h>
 # include <sys/uio.h>
 
-
 #include <stdio.h>
+
+#define PILE_A game->pile_a
+#define PILE_B game->pile_b
+#define NLINK game->n_link
+#define AVRGE game->average
 
 typedef struct		s_pile
 {
@@ -33,14 +37,17 @@ typedef struct		s_game
 {
 	t_pile			*pile_a;
 	t_pile			*pile_b;
+	int				n_link;
+	int				average;
 }					t_game;
 
 /*
-**			LIST_MOVES
+**			GAMEPLAY
 */
 
 int					check_param(char **av);
 void				init_game(t_game *game, int ac, char **av);
+int					is_game_finished(t_game *game);
 void		print(t_pile *pile);
 void		printrev(t_pile *pile);
 void				push(t_pile **dest, t_pile **src);
@@ -56,5 +63,11 @@ void				swap(t_pile **pile);
 
 void				follow_instruc(t_game *game, char *instruc);
 void 				checker(t_game *game);
+
+/*
+**			PUSH_SWAP
+*/
+
+void 				push_swap(t_game *game);
 
 #endif

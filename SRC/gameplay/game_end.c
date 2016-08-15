@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.c                                          :+:      :+:    :+:   */
+/*   game_end.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/08/11 15:26:14 by fhuang            #+#    #+#             */
-/*   Updated: 2016/08/15 16:31:04 by fhuang           ###   ########.fr       */
+/*   Created: 2016/08/15 16:27:48 by fhuang            #+#    #+#             */
+/*   Updated: 2016/08/15 16:31:21 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void			checker(t_game *game)
+int		is_game_finished(t_game *game)
 {
-	char	*line;
+	t_pile		*ptr;
 
-	while ((line = read_stdin()) != NULL)
+	ptr = game->pile_a;
+	while (ptr->next)
 	{
-		follow_instruc(game, line);
-		ft_strdel(&line);
+		if (game->pile_b != NULL || ptr->n > ptr->next->n)
+			return (0);
+		ptr = ptr->next;
 	}
-	is_game_finished(game) == 1 ? ft_putendl("OK") : ft_putendl("KO");
+	return (1);
 }

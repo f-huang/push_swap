@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_param.c                                      :+:      :+:    :+:   */
+/*   game_start.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/12 15:34:55 by fhuang            #+#    #+#             */
-/*   Updated: 2016/08/12 15:36:43 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/08/15 16:55:59 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,19 @@ int		check_param(char **av)
 
 void	init_game(t_game *game, int ac, char **av)
 {
+	int64_t		total;
+
 	game->pile_a = NULL;
 	game->pile_b = NULL;
+	game->average = 0;
+	game->n_link = 0;
+	total = 0;
 	while (ac != 1 && av[--ac])
+	{
 		push_front(&game->pile_a, ft_atoi(av[ac]));
+		game->n_link++;
+		total += game->pile_a->n;
+	}
+	if (game->n_link != 0)
+		game->average = total / game->n_link;
 }

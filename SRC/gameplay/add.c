@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/11 16:51:12 by fhuang            #+#    #+#             */
-/*   Updated: 2016/08/11 19:24:08 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/08/15 16:56:16 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ void		push_front(t_pile **pile, int n)
 		exit(EXIT_FAILURE);
 	new->n = n;
 	if (*pile == NULL)
+	{
 		*pile = new;
+	}
 	else
 	{
 		new->next = *pile;
