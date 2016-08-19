@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/12 16:08:45 by fhuang            #+#    #+#             */
-/*   Updated: 2016/08/18 22:50:01 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/08/19 15:58:22 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,18 @@
 int			is_pile_revsorted(t_pile *pile)
 {
 	t_pile	*link;
+	int		n;
 
+	n = 0;
 	link = pile;
 	while (link && link->next)
 	{
+		n++;
 		if (link->n < link->next->n)
-			return (0);
+			return (n);
 		link = link->next;
 	}
-	return (1);
+	return (n);
 }
 
 int			is_pile_sorted(t_pile *pile)
@@ -71,7 +74,7 @@ int			areverse(t_game *game, t_pile *last)
 	int		i;
 
 	i = 0;
-	if (last->n < PILE_A->n && last->n < AVRGE)
+	if (PILE_A && PILE_A != last && last->n < PILE_A->n && last->n < AVRGE)
 	{
 		reverse(&PILE_A);
 		i++;
@@ -96,7 +99,7 @@ int			arotate(t_game *game, t_pile *last)
 	int		i;
 
 	i = 0;
-	if (PILE_A->n > last->n && PILE_A->n > AVRGE)
+	if (PILE_A && PILE_A != last && PILE_A->n > last->n && PILE_A->n > AVRGE)
 	{
 		rotate(&PILE_A);
 		i++;
@@ -120,7 +123,7 @@ int			aswap(t_game *game)
 	int		i;
 
 	i = 0;
-	if (PILE_A->next && PILE_A->n > PILE_A->next->n)
+	if (PILE_A && PILE_A->next && PILE_A->n > PILE_A->next->n)
 	{
 		swap(&PILE_A);
 		i++;
@@ -139,37 +142,55 @@ int			aswap(t_game *game)
 	return i ? 1 : 0;
 }
 
+int			list_len(t_pile *pile)
+{
+	int		n;
+	t_pile	*tmp;
+
+	tmp = pile;
+	n = 0;
+	while (tmp)
+	{
+		tmp = tmp->next;
+		n++;
+	}
+	return (n);
+}
+
 void		push_swap(t_game *game)
 {
 	t_pile	*last;
+	int		ret;
 
 	printf("n link : %i -- average : %i\n", game->n_link, game->average);
 	while (is_game_finished(game) == 0)
 	{
 		last = get_last_link(PILE_A);
-		if (areverse(game, last) == 0)
+		if (is_pile_sorted(PILE_A) && (ret = is_pile_revsorted(PILE_B)))
+		{
+			while (is_pile_sorted(PILE_A))
+			{
+				push(&PILE_A, &PILE_B);
+				ft_putstr("pa\n");
+				ret--;
+			}
+		}
+		else if (areverse(game, last) == 0)
 			if (arotate(game, last) == 0)
 				if (aswap(game) == 0)
 				{
-					if (is_pile_sorted(PILE_A) && is_pile_revsorted(PILE_B))
-					{
-						while (PILE_B)
-						{
-							push(&PILE_A, &PILE_B);
-							ft_putstr("pa\n");
-						}
-					}
-					else
+					if (list_len(PILE_B) < NLINK / 2)
 					{
 						push(&PILE_B, &PILE_A);
 						ft_putstr("pb\n");
 					}
 				}
-		ft_putendlcol("--------PILE_A-------", RED);
-		print(PILE_A);
-		ft_putendlcol("---------------------", RED);
-		ft_putendlcol("--------PILE_B-------", CYAN);
-		print(PILE_B);
-		ft_putendlcol("---------------------", CYAN);
+				print_piles(game);
+	// 	ft_putendlcol("--------PILE_A-------", RED);
+	// 	print(PILE_A);
+	// 	ft_putendlcol("---------------------", RED);
+	// 	ft_putendlcol("--------PILE_B-------", CYAN);
+	// 	print(PILE_B);
+	// 	ft_putendlcol("---------------------", CYAN);
 	}
 }

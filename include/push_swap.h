@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/11 14:19:13 by fhuang            #+#    #+#             */
-/*   Updated: 2016/08/15 18:08:54 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/08/19 15:04:30 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void				init_game(t_game *game, int ac, char **av);
 int					is_game_finished(t_game *game);
 void		print(t_pile *pile);
 void		printrev(t_pile *pile);
+void		print_piles(t_game *game);
 void				push(t_pile **dest, t_pile **src);
 void				push_back(t_pile **pile, int n);
 void				push_front(t_pile **pile, int n);
