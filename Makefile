@@ -6,7 +6,7 @@
 #    By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/01/11 11:38:13 by fhuang            #+#    #+#              #
-#    Updated: 2016/08/12 16:51:42 by fhuang           ###   ########.fr        #
+#    Updated: 2016/08/18 17:38:45 by fhuang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,9 @@ LIBFT_PATH = -Llibft
 
 LIBFT = -lft
 
+CHECKER = SRC/checker
+GAMEPLAY = SRC/gameplay
+PUSH_SWAP = SRC/push_swap
 
 .PHONY: clean fclean re all
 
@@ -42,9 +45,9 @@ all: #$(NAME)
 #$(NAME): $(OBJ) $(SRC)
 #	@echo "----------------------------MINISHELL----------------------------"
 	@$(MAKE) -C libft
-	@$(MAKE) -C SRC/gameplay
-	@$(MAKE) -C SRC/checker
-#	@$(CC) $(LIBFT_PATH) $(LIBFT) $^ -o $@	#$^ for $(OBJ) and $@ for $(NAME)
+	@$(MAKE) -C $(GAMEPLAY)
+	@$(MAKE) -C $(CHECKER)
+	@$(MAKE) -C $(PUSH_SWAP)
 
 $(OBJ_PATH)%.o : $(SRC_PATH)%.c
 	@echo "\033[1;32m" "Compiling $< into $@" "\033[0m"
@@ -54,8 +57,9 @@ $(OBJ_PATH)%.o : $(SRC_PATH)%.c
 clean:
 	@rm -rf $(OBJ_PATH)
 	@$(MAKE) clean -C libft
-	@$(MAKE) clean -C SRC/gameplay
-	@$(MAKE) clean -C SRC/checker
+	@$(MAKE) clean -C $(GAMEPLAY)
+	@$(MAKE) clean -C $(CHECKER)
+	@$(MAKE) clean -C $(PUSH_SWAP)
 
 fclean: clean
 	@rm -f $(NAME)

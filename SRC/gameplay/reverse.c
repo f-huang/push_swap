@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/11 17:11:51 by fhuang            #+#    #+#             */
-/*   Updated: 2016/08/11 19:29:27 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/08/18 20:07:43 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void		reverse(t_pile **pile)
 	int		tmp;
 	t_pile	*byebye;
 
-	if (*pile)
+	if (*pile && (*pile)->next)
 	{
 		byebye = *pile;
 		while (byebye->next)

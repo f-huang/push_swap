@@ -6,7 +6,7 @@
 #    By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/01/11 11:38:13 by fhuang            #+#    #+#              #
-#    Updated: 2016/08/12 16:09:23 by fhuang           ###   ########.fr        #
+#    Updated: 2016/08/18 17:39:33 by fhuang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ LIST_PATH = ../gameplay/libgame.a
 all: $(NAME)
 
 $(NAME): $(OBJ) $(SRC)
-	@echo "----------------------------CHECKER----------------------------"
+	@echo "----------------------------PUSH_SWAP----------------------------"
 	@$(CC) $(LIST_PATH) $(LIBFT_PATH) $(LIBFT) $^ -o $@	#$^ for $(OBJ) and $@ for $(NAME)
 
 $(OBJ_PATH)%.o : %.c

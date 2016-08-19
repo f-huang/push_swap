@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/11 17:04:43 by fhuang            #+#    #+#             */
-/*   Updated: 2016/08/11 19:24:31 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/08/18 20:07:56 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void		rotate(t_pile **pile)
 	int		tmp;
 	t_pile	*byebye;
 
-	if (*pile)
+	if (*pile && (*pile)->next)
 	{
 		tmp = (*pile)->n;
 		byebye = *pile;
