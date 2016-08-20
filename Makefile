@@ -6,7 +6,7 @@
 #    By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/01/11 11:38:13 by fhuang            #+#    #+#              #
-#    Updated: 2016/08/18 17:38:45 by fhuang           ###   ########.fr        #
+#    Updated: 2016/08/21 01:13:19 by fhuang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,5 +63,8 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
+	@$(MAKE) fclean -C $(GAMEPLAY)
+	@$(MAKE) fclean -C $(CHECKER)
+	@$(MAKE) fclean -C $(PUSH_SWAP)
 
 re : fclean all
