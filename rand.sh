@@ -6,10 +6,10 @@ if [ $# -eq 1 ]; then
 	while [ $i -lt $1 ];do
 		let rand=$RANDOM%1000
 		let array[$i]=$rand
-		echo -n ${array[$i]}
-		echo " "
+		echo -n ${array[$i]}" "
 		let i+=1
 	done
+	echo
 else
 	echo "usage: ./rand.sh <number>"
 	exit
