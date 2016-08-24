@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/12 15:34:55 by fhuang            #+#    #+#             */
-/*   Updated: 2016/08/23 19:41:12 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/08/24 18:07:45 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,50 @@ static int	no_space(char *str)
 	return (0);
 }
 
-int		check_param(char **av)
+int		flags(t_game *game, char *str, t_bool *boo)
+{
+	int		i;
+
+	i = 1;
+	while (str[i])
+	{
+		if (str[i] == 'v')
+			OPT[0] = 1;
+		else if (str[i] == 'c')
+			OPT[1] = 1;
+		else if (i == 1 && str[i] == '-')
+			*boo = true;
+		else
+		{
+			if (ft_isdigit(str[i]))
+				return ft_isstrdigit(str + i) ? 1 : 0;
+			ft_putstr_fd("./push_swap: illegal option -- ", 2);
+			ft_putchar_fd(str[i], 2);
+			ft_putendl_fd("\nusage: ./push_swap [-cv] number(s)", 2);
+			exit(EXIT_SUCCESS);
+		}
+		i++;
+	}
+	return (0);
+}
+
+int		check_param(t_game *game, char **av)
 {
 	int		i;
 	int		j;
+	t_bool	boo;
 
 	i = 1;
+	boo = false;
 	while (av[i])
 	{
-		if ((ft_isstrdigit(av[i]) && !no_space(av[i])) ||\
+		if (!boo && av[i][0] == '-' && av[i][1] && ft_isdigit(av[i][1]) == 0)
+		{
+			if (flags(game, av[i], &boo) == 1)
+				return (1);
+			LEN--;
+		}
+		else if ((ft_isstrdigit(av[i]) && !no_space(av[i])) ||\
 			INT_MAX < ft_atol(av[i]) || INT_MIN > ft_atol(av[i]))
 			return (1);
 		j = i;
@@ -50,28 +85,21 @@ int		check_param(char **av)
 
 void	init_game(t_game *game, int ac, char **av)
 {
-	int64_t		total;
 
-	game->pile_a = NULL;
-	game->pile_b = NULL;
-	game->average = 0;
-	game->n_link = 0;
-	total = 0;
-	if (ac == 2 && no_space(av[1]) == 1)
+	PILE_A = NULL;
+	PILE_B = NULL;
+	ft_memset(OPT, 0, sizeof(int) *  2);
+	if (LEN == 1 && no_space(av[1]) == 1)
 	{
 		av++;
 		if ((av = ft_strsplit(av[0], ' ')) == NULL)
 			exit(EXIT_FAILURE);
 		ac = ft_tablen(av);
 	}
-	while (ac != 1 && av[--ac])
+	while (LEN-- && ac != 1 && av[--ac])
 	{
 		push_front(&game->pile_a, ft_atoi(av[ac]));
-		game->n_link++;
-		total += game->pile_a->n;
 	}
-	if (game->n_link != 0)
-		game->average = total / game->n_link;
 	if (ac == 2 && no_space(av[1]) == 1 && av != NULL)
 		ft_tabfree(av);
 

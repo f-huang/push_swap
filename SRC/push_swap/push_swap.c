@@ -6,13 +6,13 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/12 16:08:45 by fhuang            #+#    #+#             */
-/*   Updated: 2016/08/24 03:58:30 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/08/24 18:04:27 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#define PLAY_A(str, action) play_action(&PILE_A, str, action)
-#define PLAY_B(str, action) play_action(&PILE_B, str, action)
+#define PLAY_A(str, action) play_action(game, &PILE_A, str, action)
+#define PLAY_B(str, action) play_action(game, &PILE_B, str, action)
 
 int			is_pile_revsorted(t_pile *pile)
 {
@@ -57,29 +57,17 @@ t_pile		*get_last_link(t_pile *pile)
 	return (last_link);
 }
 
-// int			list_len(t_pile *pile)
-// {
-// 	int		n;
-// 	t_pile	*tmp;
-//
-// 	tmp = pile;
-// 	n = 0;
-// 	while (tmp)
-// 	{
-// 		tmp = tmp->next;
-// 		n++;
-// 	}
-// 	return (n);
-// }
-
-void		play_action(t_pile **pile, char *action, void (f)(t_pile**))
+void		play_action(t_game *game, t_pile **pile, char *action, void (f)(t_pile**))
 {
 	f(pile);
 	if (action != NULL)
+	{
 		ft_putstr(action);
+		OPT[0] ? print_piles(game) : 0;
+	}
 }
 
-int		rev_and_rot(t_game *game)
+static int		rev_and_rot(t_game *game)
 {
 	const char	*str[] = {"ra\n", "rb\n", "rr\n", "rra\n", "rrb\n", "rrr\n"};
 	int		tmp;
@@ -102,7 +90,7 @@ int		rev_and_rot(t_game *game)
 			else
 			{
 				tmp != -1 ? ft_putstr(str[tmp]) : 0;
-				tmp != -1 ? print_piles(game) : 0;
+				tmp != -1 && OPT[0]? print_piles(game) : 0;
 				tmp = last->n > last->prev->n ? 0 : 3;
 			}
 			last->n > last->prev->n ? PLAY_A(NULL, rotate) : PLAY_A(NULL, reverse);
@@ -110,28 +98,13 @@ int		rev_and_rot(t_game *game)
 		if (tmp >= 0)
 		{
 			ft_putstr(str[tmp]);
-			print_piles(game);
+			OPT[0] ? print_piles(game) : 0;
 		}
 	}
 	return (tmp);
-	// last = get_last_link(PILE_B);
-	// if (is_pile_sorted(PILE_A) == 0 && PILE_B && PILE_B != last && PILE_B->n < last->n)
-	// {
-	// 	last->n > last->prev->n ? PLAY_B("rrb\n", reverse) : PLAY_B("rb\n", rotate);
-	// 	// print_piles(game);
-	// }
-	// last = get_last_link(PILE_A);
-	// if (is_pile_sorted(PILE_A) == 0 && PILE_A && PILE_A != last && PILE_A->n > last->n)
-	// {
-	// 	if (last->n > last->prev->n)
-	// 		PLAY_A("ra\n", rotate);
-	// 	else
-	// 		PLAY_A("rra\n", reverse);
-	// 		// print_piles(game);
-	// }
 }
 
-int		swaap(t_game *game)
+static int		swaap(t_game *game)
 {
 	const char	*str[] = {"sa\n", "sb\n", "ss\n"};
 	int		tmp;
@@ -150,7 +123,7 @@ int		swaap(t_game *game)
 	if (tmp >= 0)
 	{
 		ft_putstr(str[tmp]);
-		print_piles(game);
+		OPT[0] ? print_piles(game) : 0;
 	}
 	return (tmp);
 }
@@ -168,18 +141,17 @@ void		push_swap(t_game *game)
 			{
 				push(&PILE_B, &PILE_A);
 				ft_putstr("pb\n");
-				print_piles(game);
+				OPT[0] ? print_piles(game) : 0;
 			}
 		}
 		while (PILE_B)
 		{
 			push(&PILE_A, &PILE_B);
 			ft_putstr("pa\n");
-			print_piles(game);
+			OPT[0] ? print_piles(game) : 0;
 			if (PILE_A->next && PILE_A->n > PILE_A->next->n)
-			{	PLAY_A("sa\n", swap);
-				print_piles(game);
-		}}
-		print_piles(game);
+				PLAY_A("sa\n", swap);
+		}
+		// print_piles(game);
 	}
 }

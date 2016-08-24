@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/11 14:19:13 by fhuang            #+#    #+#             */
-/*   Updated: 2016/08/19 15:04:30 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/08/24 18:05:56 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 
 #define PILE_A game->pile_a
 #define PILE_B game->pile_b
-#define NLINK game->n_link
-#define AVRGE game->average
+#define OPT game->option
+#define LEN game->len
 
 typedef struct		s_pile
 {
@@ -37,15 +37,15 @@ typedef struct		s_game
 {
 	t_pile			*pile_a;
 	t_pile			*pile_b;
-	int				n_link;
-	int				average;
+	int				option[2];
+	int				len;
 }					t_game;
 
 /*
 **			GAMEPLAY
 */
 
-int					check_param(char **av);
+int					check_param(t_game *game, char **av);
 void				init_game(t_game *game, int ac, char **av);
 int					is_game_finished(t_game *game);
 void		print(t_pile *pile);

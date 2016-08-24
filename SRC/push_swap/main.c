@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/12 15:28:29 by fhuang            #+#    #+#             */
-/*   Updated: 2016/08/12 15:38:59 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/08/24 18:06:13 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int			main(int ac, char **av)
 
 	if (ac > 1)
 	{
-		if (check_param(av))
+		game.len = ac;
+		if (check_param(&game, av))
 		{
 			ft_putendl_fd("Error", 2);
 			return (1);
