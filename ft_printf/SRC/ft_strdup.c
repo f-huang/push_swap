@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/08/12 15:28:29 by fhuang            #+#    #+#             */
-/*   Updated: 2016/08/25 17:48:36 by fhuang           ###   ########.fr       */
+/*   Created: 2015/11/24 11:59:58 by fhuang            #+#    #+#             */
+/*   Updated: 2016/05/18 21:47:00 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int			main(int ac, char **av)
+char	*ft_strdup(const char *s1)
 {
-	t_game		game;
+	char	*dest;
+	int		i;
 
-	if (ac > 1)
+	if (!s1)
+		return (NULL);
+	dest = (char*)ft_memalloc(ft_strlen(s1) + 1);
+	if (dest == NULL)
+		return (NULL);
+	i = 0;
+	while (s1[i])
 	{
-		game.len = ac - 1;
-		ft_memset(game.option, 0, sizeof(int) *  2);
-		if (check_param(&game, av))
-		{
-			ft_putendl_fd("Error", 2);
-			return (1);
-		}
-		init_game(&game, ac, av);
-		push_swap(&game);
+		dest[i] = s1[i];
+		i++;
 	}
-	return (0);
+	return (dest);
 }

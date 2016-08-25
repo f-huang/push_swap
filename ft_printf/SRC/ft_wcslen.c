@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_wcslen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/08/12 15:28:29 by fhuang            #+#    #+#             */
-/*   Updated: 2016/08/25 17:48:36 by fhuang           ###   ########.fr       */
+/*   Created: 2016/06/17 15:43:06 by fhuang            #+#    #+#             */
+/*   Updated: 2016/06/17 15:47:29 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int			main(int ac, char **av)
+size_t		ft_wcslen(const wchar_t *wstr)
 {
-	t_game		game;
+	wchar_t		*ptr;
 
-	if (ac > 1)
-	{
-		game.len = ac - 1;
-		ft_memset(game.option, 0, sizeof(int) *  2);
-		if (check_param(&game, av))
-		{
-			ft_putendl_fd("Error", 2);
-			return (1);
-		}
-		init_game(&game, ac, av);
-		push_swap(&game);
-	}
-	return (0);
+	ptr = (wchar_t*)wstr;
+	while (*ptr)
+		ptr++;
+	return ((size_t)(ptr - wstr));
 }

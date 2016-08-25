@@ -6,19 +6,21 @@
 #    By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/01/11 11:38:13 by fhuang            #+#    #+#              #
-#    Updated: 2016/08/18 17:39:33 by fhuang           ###   ########.fr        #
+#    Updated: 2016/06/29 17:53:30 by fhuang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = push_swap
+NAME = libftprintf.a
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -g -Wall -Werror -Wextra
 
-SRC_NAME = main.c push_swap.c
+SRC_PATH = ./SRC/
 
-SRC = $(SCR_NAME)
+SRC_NAME = $(shell ls SRC)
+
+SRC = $(addprefix $(SRC_PATH), $(SCR_NAME))
 
 OBJ_PATH = ./OBJ/
 
@@ -26,27 +28,25 @@ OBJ_NAME = $(SRC_NAME:%.c=%.o)
 
 OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
 
-HEADER_PATH = -I ../../include/
-
-LIBFT_PATH = -L ../../libft
+HEADER_PATH = -Iinclude/
 
 LIBFT = -lft
 
-LIST_PATH = ../gameplay/libgame.a
 
 .PHONY: clean fclean re all
 
 all: $(NAME)
 
 $(NAME): $(OBJ) $(SRC)
-	@echo "----------------------------PUSH_SWAP----------------------------"
-	@$(CC) $(LIST_PATH) $(LIBFT_PATH) $(LIBFT) $^ -o $@	#$^ for $(OBJ) and $@ for $(NAME)
+	@echo "----------------------------FT_PRINTF----------------------------"
+	@ar rc $(NAME) $(OBJ)
+	@ranlib $(NAME)
 
-$(OBJ_PATH)%.o : %.c
+$(OBJ_PATH)%.o : $(SRC_PATH)%.c
 	@echo "\033[1;32m" "Compiling $< into $@" "\033[0m"
 	@mkdir -p $(OBJ_PATH)
-	@$(CC) $(HEADER_PATH)  -c $< -o $@
-#$(CFLAGS)
+	@$(CC) $(CFLAGS) $(HEADER_PATH)  -c $< -o $@
+
 clean:
 	@rm -rf $(OBJ_PATH)
 

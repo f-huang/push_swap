@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/08/12 15:28:29 by fhuang            #+#    #+#             */
-/*   Updated: 2016/08/25 17:48:36 by fhuang           ###   ########.fr       */
+/*   Created: 2015/11/25 13:05:10 by fhuang            #+#    #+#             */
+/*   Updated: 2016/06/12 19:07:51 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int			main(int ac, char **av)
+void	*ft_memset(void *b, int c, size_t len)
 {
-	t_game		game;
+	size_t			i;
+	unsigned char	c_char;
+	unsigned char	*p;
 
-	if (ac > 1)
+	c_char = (unsigned char)c;
+	p = (unsigned char*)b;
+	i = 0;
+	while (i < len)
 	{
-		game.len = ac - 1;
-		ft_memset(game.option, 0, sizeof(int) *  2);
-		if (check_param(&game, av))
-		{
-			ft_putendl_fd("Error", 2);
-			return (1);
-		}
-		init_game(&game, ac, av);
-		push_swap(&game);
+		p[i] = c_char;
+		i++;
 	}
-	return (0);
+	return ((void*)p);
 }

@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/08/12 15:28:29 by fhuang            #+#    #+#             */
-/*   Updated: 2016/08/25 17:48:36 by fhuang           ###   ########.fr       */
+/*   Created: 2015/11/24 12:07:56 by fhuang            #+#    #+#             */
+/*   Updated: 2016/06/18 23:21:48 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int			main(int ac, char **av)
+char	*ft_strncpy(char *dst, const char *src, size_t n)
 {
-	t_game		game;
+	size_t	i;
 
-	if (ac > 1)
+	i = 0;
+	while (n && src[i])
 	{
-		game.len = ac - 1;
-		ft_memset(game.option, 0, sizeof(int) *  2);
-		if (check_param(&game, av))
-		{
-			ft_putendl_fd("Error", 2);
-			return (1);
-		}
-		init_game(&game, ac, av);
-		push_swap(&game);
+		dst[i] = src[i];
+		i++;
+		n--;
 	}
-	return (0);
+	while (n > 0)
+	{
+		dst[i++] = '\0';
+		n--;
+	}
+	return (dst);
 }

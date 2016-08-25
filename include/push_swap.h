@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/11 14:19:13 by fhuang            #+#    #+#             */
-/*   Updated: 2016/08/24 18:05:56 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/08/25 18:51:47 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PUSH_SWAP_H
 
 # include "../libft/include/libft.h"
+# include "../ft_printf/include/ft_printf.h"
 # include <unistd.h>
 # include <stdlib.h>
 # include <sys/types.h>
@@ -24,7 +25,7 @@
 #define PILE_A game->pile_a
 #define PILE_B game->pile_b
 #define OPT game->option
-#define LEN game->len
+#define NLINK game->len
 
 typedef struct		s_pile
 {

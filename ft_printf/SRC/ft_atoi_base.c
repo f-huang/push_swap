@@ -1,32 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_atoi_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/08/12 15:28:29 by fhuang            #+#    #+#             */
-/*   Updated: 2016/08/25 17:48:36 by fhuang           ###   ########.fr       */
+/*   Created: 2015/11/25 10:53:44 by fhuang            #+#    #+#             */
+/*   Updated: 2016/07/01 16:24:00 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int			main(int ac, char **av)
+int		ft_atoi_base(const char *str, int base)
 {
-	t_game		game;
+	int			i;
+	int			res;
+	const char	*ptr;
+	int			negatif;
 
-	if (ac > 1)
+	i = 0;
+	res = 0;
+	negatif = 1;
+	ptr = str;
+	while (*ptr && ft_isspace(*ptr))
+		ptr++;
+	negatif = *ptr == '-' ? -1 : 1;
+	if (*ptr == '-' || *ptr == '+')
+		ptr++;
+	while (*ptr && ft_isdigit(*ptr))
 	{
-		game.len = ac - 1;
-		ft_memset(game.option, 0, sizeof(int) *  2);
-		if (check_param(&game, av))
-		{
-			ft_putendl_fd("Error", 2);
-			return (1);
-		}
-		init_game(&game, ac, av);
-		push_swap(&game);
+		res *= base;
+		res += negatif * (*ptr - '0');
+		ptr++;
 	}
-	return (0);
+	return (res);
 }

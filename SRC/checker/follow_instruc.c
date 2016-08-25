@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/11 20:22:16 by fhuang            #+#    #+#             */
-/*   Updated: 2016/08/11 21:40:30 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/08/25 17:53:07 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,5 @@ void		follow_instruc(t_game *game, char *instruc)
 	if ((ret = is_valid_instruc(instruc)) == -1)
 		return ;
 	play_instruc(game, instruc, ret);
-		print(game->pile_a);
-		print(game->pile_b);
+	OPT[0] == 1 ? print_piles(game) : 0;
 }

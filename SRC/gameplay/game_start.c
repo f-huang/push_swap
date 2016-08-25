@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/12 15:34:55 by fhuang            #+#    #+#             */
-/*   Updated: 2016/08/24 18:07:45 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/08/25 18:52:39 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,7 @@ int		flags(t_game *game, char *str, t_bool *boo)
 		{
 			if (ft_isdigit(str[i]))
 				return ft_isstrdigit(str + i) ? 1 : 0;
-			ft_putstr_fd("./push_swap: illegal option -- ", 2);
-			ft_putchar_fd(str[i], 2);
-			ft_putendl_fd("\nusage: ./push_swap [-cv] number(s)", 2);
+			ft_printf("./push_swap: illegal option -- %c\nusage: ./push_swap [-cv] number(s)\n", str[i]);
 			exit(EXIT_SUCCESS);
 		}
 		i++;
@@ -69,11 +67,13 @@ int		check_param(t_game *game, char **av)
 		{
 			if (flags(game, av[i], &boo) == 1)
 				return (1);
-			LEN--;
+			NLINK--;
 		}
 		else if ((ft_isstrdigit(av[i]) && !no_space(av[i])) ||\
 			INT_MAX < ft_atol(av[i]) || INT_MIN > ft_atol(av[i]))
 			return (1);
+		if (av[i][0] != '-')
+			boo = true;
 		j = i;
 		while (av[++j])
 			if (ft_strcmp(av[i], av[j]) == 0)
@@ -85,22 +85,19 @@ int		check_param(t_game *game, char **av)
 
 void	init_game(t_game *game, int ac, char **av)
 {
-
 	PILE_A = NULL;
 	PILE_B = NULL;
-	ft_memset(OPT, 0, sizeof(int) *  2);
-	if (LEN == 1 && no_space(av[1]) == 1)
+	if (NLINK == 1 && no_space(av[1]) == 1)
 	{
 		av++;
 		if ((av = ft_strsplit(av[0], ' ')) == NULL)
 			exit(EXIT_FAILURE);
 		ac = ft_tablen(av);
 	}
-	while (LEN-- && ac != 1 && av[--ac])
+	while (NLINK-- && ac != 1 && av[--ac])
 	{
 		push_front(&game->pile_a, ft_atoi(av[ac]));
 	}
 	if (ac == 2 && no_space(av[1]) == 1 && av != NULL)
 		ft_tabfree(av);
-
 }

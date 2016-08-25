@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/08/12 15:28:29 by fhuang            #+#    #+#             */
-/*   Updated: 2016/08/25 17:48:36 by fhuang           ###   ########.fr       */
+/*   Created: 2015/11/25 13:36:33 by fhuang            #+#    #+#             */
+/*   Updated: 2016/06/12 14:24:57 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int			main(int ac, char **av)
+void	ft_bzero(void *s, size_t n)
 {
-	t_game		game;
+	size_t			i;
+	unsigned char	*p;
 
-	if (ac > 1)
+	i = 0;
+	p = (unsigned char*)s;
+	if (n == 0)
+		return ;
+	else
 	{
-		game.len = ac - 1;
-		ft_memset(game.option, 0, sizeof(int) *  2);
-		if (check_param(&game, av))
+		while (i < n)
 		{
-			ft_putendl_fd("Error", 2);
-			return (1);
+			p[i] = 0;
+			i++;
 		}
-		init_game(&game, ac, av);
-		push_swap(&game);
 	}
-	return (0);
 }
