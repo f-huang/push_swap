@@ -1,38 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi_base.c                                     :+:      :+:    :+:   */
+/*   ft_strdelchar.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/25 10:53:44 by fhuang            #+#    #+#             */
-/*   Updated: 2016/09/02 14:04:30 by fhuang           ###   ########.fr       */
+/*   Created: 2016/10/13 16:23:16 by fhuang            #+#    #+#             */
+/*   Updated: 2016/10/13 18:13:55 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_atoi_base(const char *str, int base)
+char	*ft_strdelchar(char *str, int index)
 {
-	int			i;
-	int			res;
-	const char	*ptr;
-	int			negatif;
+	char	*ret;
+	int		len;
 
-	i = 0;
-	res = 0;
-	negatif = 1;
-	ptr = str;
-	while (*ptr && ft_isspace(*ptr))
-		ptr++;
-	negatif = *ptr == '-' ? -1 : 1;
-	if (*ptr == '-' || *ptr == '+')
-		ptr++;
-	while (*ptr && ft_isdigit(*ptr))
-	{
-		res *= base;
-		res += negatif * (*ptr - '0');
-		ptr++;
-	}
-	return (res);
+	len = ft_strlen(str);
+	if (!(ret = ft_strnew(len - 1)))
+		return (NULL);
+	ret = ft_strncat(ret, str, index);
+	ret = ft_strcat(ret, str + index + 1);
+	return (ret);
 }

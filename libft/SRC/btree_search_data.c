@@ -6,13 +6,14 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/05 19:20:42 by fhuang            #+#    #+#             */
-/*   Updated: 2016/06/05 23:54:21 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/09/02 14:13:36 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void *btree_search_item(t_btree *root, void *data_ref, int (*cmpf)(void *, void *))
+void	*btree_search_item(t_btree *root, void *data_ref,\
+			int (*cmpf)(void *, void *))
 {
 	if (root)
 	{

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa_base.c                                     :+:      :+:    :+:   */
+/*   ft_stoa_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/13 13:40:41 by fhuang            #+#    #+#             */
-/*   Updated: 2016/10/28 16:35:40 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/07/12 00:57:15 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	count_n(unsigned int n, int base)
+static int	count_n(unsigned short n, int base)
 {
 	int					ret;
 
@@ -25,25 +25,28 @@ static int	count_n(unsigned int n, int base)
 	return (ret);
 }
 
-char		*ft_itoa_base(int n, int base)
+char		*ft_stoa_base(short n, int base, bool is_uin, bool *is_neg)
 {
-	char const			pattern[] = "0123456789abcdef";
+	char				pattern[17];
 	char				*ret;
-	unsigned int		uin;
+	unsigned short		uin;
 	int					len;
 	bool				neg;
 
+	ft_strcpy(pattern, "0123456789abcdef");
 	neg = (base == 10 && n < 0) ? 1 : 0;
-	neg == false ? ABS(n) : 1;
-	uin = (unsigned int)n;
-	len = count_n(uin, base) + neg;
+	neg && is_uin == false ? ABS(n) : 1;
+	uin = (unsigned short)n;
+	len = count_n(uin, base);
 	if ((ret = ft_strnew(len)) == NULL)
 		return (NULL);
-	while (len-- >= 0)
+	ret[len--] = 0;
+	while (len >= 0)
 	{
 		ret[len] = pattern[uin % base];
 		uin /= base;
+		len--;
 	}
-	neg ? ret[0] = '-' : 0;
+	*is_neg = is_uin == false ? neg : 0;
 	return (ret);
 }

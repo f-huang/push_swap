@@ -1,38 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi_base.c                                     :+:      :+:    :+:   */
+/*   ft_strchange.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/25 10:53:44 by fhuang            #+#    #+#             */
-/*   Updated: 2016/09/02 14:04:30 by fhuang           ###   ########.fr       */
+/*   Created: 2016/10/13 13:58:35 by fhuang            #+#    #+#             */
+/*   Updated: 2016/10/13 14:01:24 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_atoi_base(const char *str, int base)
+char	*ft_strchange(char *in, const char *bywhat)
 {
-	int			i;
-	int			res;
-	const char	*ptr;
-	int			negatif;
+	char	*tmp;
 
-	i = 0;
-	res = 0;
-	negatif = 1;
-	ptr = str;
-	while (*ptr && ft_isspace(*ptr))
-		ptr++;
-	negatif = *ptr == '-' ? -1 : 1;
-	if (*ptr == '-' || *ptr == '+')
-		ptr++;
-	while (*ptr && ft_isdigit(*ptr))
-	{
-		res *= base;
-		res += negatif * (*ptr - '0');
-		ptr++;
-	}
-	return (res);
+	tmp = in;
+	in = ft_strdup(bywhat);
+	ft_strdel(&tmp);
+	return (in);
 }

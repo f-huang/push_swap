@@ -6,13 +6,14 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/05 19:05:36 by fhuang            #+#    #+#             */
-/*   Updated: 2016/06/05 23:53:42 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/09/02 14:05:39 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	btree_insert_data(t_btree **root, void *item, int (*cmpf)(void *, void *))
+void	btree_insert_data(t_btree **root, void *item,\
+			int (*cmpf)(void *, void *))
 {
 	t_btree		*new;
 

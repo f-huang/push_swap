@@ -6,34 +6,49 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/03 22:08:09 by fhuang            #+#    #+#             */
-/*   Updated: 2016/08/11 20:57:24 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/09/02 14:27:43 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
-char			*read_stdin(void)
+
+static int	update_line_lfo(char **line, char **lfo)
+{
+	if (*lfo)
+	{
+		*line = ft_strdup(*lfo);
+		free(*lfo);
+		*lfo = NULL;
+	}
+	else
+		*line = (char*)ft_strnew(1);
+	if (*line == NULL)
+		return (-1);
+	return (0);
+}
+
+int			read_stdin(char **line)
 {
 	int				ret;
+	static char		*lfo = NULL;
 	char			*tmp;
-	char			*line;
 	char			buf[BUFF_SIZE + 1];
 
-	if (BUFF_SIZE <= 0)
-		return (NULL);
-	line = (char*)ft_strnew(1);
+	if (BUFF_SIZE <= 0 || update_line_lfo(line, &lfo) == -1)
+		return (-1);
 	ft_bzero(buf, BUFF_SIZE + 1);
-	while ((ft_strchr(line, '\n') == 0) && (ret = read(0, buf, BUFF_SIZE)))
+	while ((ft_strchr(*line, '\n') == 0) && (ret = read(0, buf, BUFF_SIZE)))
 	{
 		if (ret == -1)
-			return (NULL);
-		if (!(line = ft_strjoin_free(line, buf)))
-			return (NULL);
+			return (-1);
+		if (!(*line = ft_strjoin_free(*line, buf)))
+			return (-1);
 	}
-	tmp = ft_strstr(line, "\n");
+	tmp = ft_strstr(*line, "\n");
 	if (tmp)
+	{
+		lfo = ft_strdup(tmp + 1);
 		ft_bzero(tmp, ft_strlen(tmp));
-	if (ret == 0)
-		line = NULL;
-	return (line);
+	}
+	return (ret ? 1 : 0);
 }

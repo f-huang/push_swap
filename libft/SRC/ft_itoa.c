@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/26 12:47:57 by fhuang            #+#    #+#             */
-/*   Updated: 2016/06/12 20:25:35 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/09/02 14:04:39 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char						*ft_itoa(int n)
 	char			*ret;
 	int				neg;
 	int				len;
-	long int	uin;
+	long int		uin;
 
 	neg = n < 0 ? 1 : 0;
 	uin = (long int)(n);

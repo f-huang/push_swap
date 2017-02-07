@@ -1,38 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi_base.c                                     :+:      :+:    :+:   */
+/*   ft_strreplace.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/25 10:53:44 by fhuang            #+#    #+#             */
-/*   Updated: 2016/09/02 14:04:30 by fhuang           ###   ########.fr       */
+/*   Created: 2016/09/06 17:05:42 by fhuang            #+#    #+#             */
+/*   Updated: 2016/09/07 12:12:06 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_atoi_base(const char *str, int base)
+char	*ft_strreplace(char *in, char *where, char *bywhat)
 {
-	int			i;
-	int			res;
-	const char	*ptr;
-	int			negatif;
+	char	*ret;
+	char	*tmp;
+	int		len;
 
-	i = 0;
-	res = 0;
-	negatif = 1;
-	ptr = str;
-	while (*ptr && ft_isspace(*ptr))
-		ptr++;
-	negatif = *ptr == '-' ? -1 : 1;
-	if (*ptr == '-' || *ptr == '+')
-		ptr++;
-	while (*ptr && ft_isdigit(*ptr))
+	if ((tmp = ft_strstr(in, where)) != NULL)
 	{
-		res *= base;
-		res += negatif * (*ptr - '0');
-		ptr++;
+		len = ft_strlen(in) - ft_strlen(where) + ft_strlen(bywhat);
+		ret = ft_strnew(len);
+		if (ret == NULL)
+			return (NULL);
+		ret = ft_strncat(ret, in, (size_t)(tmp - in));
+		ret = ft_strcat(ret, bywhat);
+		tmp += ft_strlen(where);
+		ret = ft_strcat(ret, tmp);
+		return (ret);
 	}
-	return (res);
+	return (ft_strdup(""));
 }

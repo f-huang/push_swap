@@ -1,0 +1,12 @@
+obj/
+*.o
+*.a
+
+.cache_exists
+
+*.~
+a.out
+
+.DS_STORE
+*.dSYM
+*.swp

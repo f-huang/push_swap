@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 19:11:26 by fhuang            #+#    #+#             */
-/*   Updated: 2016/07/02 23:53:41 by fhuang           ###   ########.fr       */
+/*   Updated: 2016/09/02 14:13:49 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static int	ft_space(int c)
 
 char		*ft_strtrim(char const *s)
 {
-	// char	*ret;
 	int		i;
 	int		end;
 

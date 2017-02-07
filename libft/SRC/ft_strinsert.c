@@ -1,38 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi_base.c                                     :+:      :+:    :+:   */
+/*   ft_strinsert.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/25 10:53:44 by fhuang            #+#    #+#             */
-/*   Updated: 2016/09/02 14:04:30 by fhuang           ###   ########.fr       */
+/*   Created: 2016/10/11 14:32:57 by fhuang            #+#    #+#             */
+/*   Updated: 2016/10/11 14:36:18 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_atoi_base(const char *str, int base)
+char	*ft_strinsert(char *str, char *to_insert, int where)
 {
-	int			i;
-	int			res;
-	const char	*ptr;
-	int			negatif;
+	char	*after_insert;
+	char	*ret;
 
-	i = 0;
-	res = 0;
-	negatif = 1;
-	ptr = str;
-	while (*ptr && ft_isspace(*ptr))
-		ptr++;
-	negatif = *ptr == '-' ? -1 : 1;
-	if (*ptr == '-' || *ptr == '+')
-		ptr++;
-	while (*ptr && ft_isdigit(*ptr))
-	{
-		res *= base;
-		res += negatif * (*ptr - '0');
-		ptr++;
-	}
-	return (res);
+	if (!(after_insert = ft_strdup(str + where)))
+		return (NULL);
+	ft_strclr(str + where);
+	if (!(ret = ft_str3cat(str, to_insert, after_insert)))
+		return (NULL);
+	ft_strdel(&after_insert);
+	return (ret);
 }
