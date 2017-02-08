@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:17:23 by fhuang            #+#    #+#             */
-/*   Updated: 2017/02/08 17:44:12 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/02/08 19:11:33 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ static int	is_pile_sorted(int *pile, int len)
 	}
 	return (GOOD);
 }
-int		is_game_finished(t_piles piles)
+
+int			is_game_finished(t_piles piles)
 {
 	if (!is_pile_empty(piles.pile_b))
 		return (ERROR);
