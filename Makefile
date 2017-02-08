@@ -6,7 +6,7 @@
 #    By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 15:45:39 by fhuang            #+#    #+#              #
-#    Updated: 2017/02/08 17:53:50 by fhuang           ###   ########.fr        #
+#    Updated: 2017/02/08 19:06:50 by fhuang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,18 +22,19 @@ OBJDIR	:=	obj/
 BINDIR	:=	bin/
 INCDIR	:=	include/
 LIBDIR	:=	libft/
-DIRBUILTINS	:= obj/builtins/
+INSTRUCTDIR	:=	instructions/
 SRC		:=	$(SRCDIR)call_instruction.c		\
 			$(SRCDIR)check_parameters.c		\
 			$(SRCDIR)destroy_piles.c		\
 			$(SRCDIR)init_piles.c			\
+			$(SRCDIR)$(INSTRUCTDIR)reverse_rotate.c	\
+			$(SRCDIR)$(INSTRUCTDIR)rotate.c	\
+			$(SRCDIR)$(INSTRUCTDIR)swap.c	\
 			$(SRCDIR)is_game_finished.c
 OBJ		:=	$(SRC:$(SRCDIR)%.c=$(OBJDIR)%.o)
 INC		:=	-I./$(INCDIR) -I./$(LIBDIR)$(INCDIR)
 LIBPATH	:=	-L./$(LIBDIR)lib -lft
 CACHEF	:=	.cache_exists
-HISTORY	:=	~/.42sh_history
-42SHRC	:=	~/.42shrc
 # ====================
 
 # ====== Colors ======
@@ -69,6 +70,7 @@ $(OBJDIR)%.o: $(SRCDIR)%.c $(CACHEF)
 
 $(CACHEF):
 	test -d $(OBJDIR) || mkdir $(OBJDIR)
+	test -d $(OBJDIR)$(INSTRUCTDIR) || mkdir $(OBJDIR)$(INSTRUCTDIR)
 	test -d $(OBJDIRCHKER) || mkdir $(OBJDIRCHKER)
 	test -d $(CACHEF) || touch $(CACHEF)
 
