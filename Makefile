@@ -6,7 +6,7 @@
 #    By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 15:45:39 by fhuang            #+#    #+#              #
-#    Updated: 2017/02/08 12:38:09 by fhuang           ###   ########.fr        #
+#    Updated: 2017/02/08 17:53:50 by fhuang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,11 @@ BINDIR	:=	bin/
 INCDIR	:=	include/
 LIBDIR	:=	libft/
 DIRBUILTINS	:= obj/builtins/
-SRC		:=	$(SRCDIR)check_parameters.c
+SRC		:=	$(SRCDIR)call_instruction.c		\
+			$(SRCDIR)check_parameters.c		\
+			$(SRCDIR)destroy_piles.c		\
+			$(SRCDIR)init_piles.c			\
+			$(SRCDIR)is_game_finished.c
 OBJ		:=	$(SRC:$(SRCDIR)%.c=$(OBJDIR)%.o)
 INC		:=	-I./$(INCDIR) -I./$(LIBDIR)$(INCDIR)
 LIBPATH	:=	-L./$(LIBDIR)lib -lft
