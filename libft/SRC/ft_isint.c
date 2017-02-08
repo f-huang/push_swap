@@ -1,29 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isstrdigit.c                                    :+:      :+:    :+:   */
+/*   ft_isint.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/08/11 15:28:55 by fhuang            #+#    #+#             */
-/*   Updated: 2017/02/08 13:23:07 by fhuang           ###   ########.fr       */
+/*   Created: 2017/02/08 12:31:35 by fhuang            #+#    #+#             */
+/*   Updated: 2017/02/08 13:21:54 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <limits.h>
 #include "libft.h"
 
-int			ft_isstrdigit(char const *s)
+int		ft_isint(char *str)
 {
-	int		i;
-
-	i = 0;
-	if (s[i] && (s[i] == '-' || s[i] == '+'))
-		i++;
-	while (s[i])
-	{
-		if (ft_isdigit(s[i]) == 0)
-			return (0);
-		i++;
-	}
-	return (1);
+	return (INT_MIN <= ft_atol(str) && ft_atol(str) <= INT_MAX);
 }

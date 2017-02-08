@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 23:13:27 by fhuang            #+#    #+#             */
-/*   Updated: 2016/10/28 17:38:14 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/02/08 12:36:45 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdarg.h>
 # include <locale.h>
 # include <stdbool.h>
+# include <limits.h>
 
 # include "libft.h"
 
@@ -45,19 +46,19 @@
 # define PUSH_BACK(c, n) push_char_back(link, str, c, n)
 # define PUSH_FRONT(c, n) push_char_front(link, str, c, n)
 
-# define CHAR_BIT 8
-# define CHAR_MIN -128
-# define CHAR_MAX 127
-# define UCHAR_MAX 255
-# define SHRT_MIN -32768
-# define SHRT_MAX 32767
-# define USHRT_MIN 65535
-# define INT_MIN -2147483648
-# define INT_MAX 2147483647
-# define UINT_MAX 4294967295
-# define LONG_MIN -9223372036854775808
-# define LONG_MAX +9223372036854775807
-# define ULONG_MAX 18446744073709551615
+// # define CHAR_BIT 8
+// # define CHAR_MIN -128
+// # define CHAR_MAX 127
+// # define UCHAR_MAX 255
+// # define SHRT_MIN -32768
+// # define SHRT_MAX 32767
+// # define USHRT_MIN 65535
+// # define INT_MIN -2147483648
+// # define INT_MAX 2147483647
+// # define UINT_MAX 4294967295
+// # define LONG_MIN -9223372036854775808
+// # define LONG_MAX +9223372036854775807
+// # define ULONG_MAX 18446744073709551615
 
 # define MASK1 "0xxxxxxx"
 # define MASK2 "110xxxxx10xxxxxx"

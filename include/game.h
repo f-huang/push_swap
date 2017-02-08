@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isstrdigit.c                                    :+:      :+:    :+:   */
+/*   game.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/08/11 15:28:55 by fhuang            #+#    #+#             */
-/*   Updated: 2017/02/08 13:23:07 by fhuang           ###   ########.fr       */
+/*   Created: 2017/02/08 12:10:39 by fhuang            #+#    #+#             */
+/*   Updated: 2017/02/08 12:37:06 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef GAME_H
+# define GAME_H
 
-int			ft_isstrdigit(char const *s)
-{
-	int		i;
+#ifndef GOOD
+# define GOOD 1
+#endif
 
-	i = 0;
-	if (s[i] && (s[i] == '-' || s[i] == '+'))
-		i++;
-	while (s[i])
-	{
-		if (ft_isdigit(s[i]) == 0)
-			return (0);
-		i++;
-	}
-	return (1);
-}
+#ifndef ERROR
+# define ERROR 0
+#endif
+
+#ifndef ERROR_STRING
+# define ERROR_STRING "Error\n"
+#endif
+
+int		check_parameters(char **av);
+
+#endif

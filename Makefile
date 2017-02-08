@@ -6,7 +6,7 @@
 #    By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 15:45:39 by fhuang            #+#    #+#              #
-#    Updated: 2017/02/07 20:05:14 by fhuang           ###   ########.fr        #
+#    Updated: 2017/02/08 12:38:09 by fhuang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ BINDIR	:=	bin/
 INCDIR	:=	include/
 LIBDIR	:=	libft/
 DIRBUILTINS	:= obj/builtins/
-SRC		:=
+SRC		:=	$(SRCDIR)check_parameters.c
 OBJ		:=	$(SRC:$(SRCDIR)%.c=$(OBJDIR)%.o)
 INC		:=	-I./$(INCDIR) -I./$(LIBDIR)$(INCDIR)
 LIBPATH	:=	-L./$(LIBDIR)lib -lft
@@ -57,7 +57,7 @@ OBJCHKER	:=	$(SRCCHKER:$(DIRCHKER)%.c=$(OBJDIRCHKER)%.o)
 .PHONY: all libft checker norme clean fclean re
 .SILENT:
 
-all: libft checker
+all: libft $(OBJ) checker
 
 $(OBJDIR)%.o: $(SRCDIR)%.c $(CACHEF)
 	$(CC) $(CFLAGS) -c $< -o $@ $(INC)
@@ -75,7 +75,7 @@ libft:
 	make -C $(LIBDIR)
 
 checker: $(OBJCHKER)
-	$(CC) $(CFLAGS) -o $(BINCHKER) $(OBJCHKER) $(LIBPATH) $(LIB) $(INC)
+	$(CC) $(CFLAGS) -o $(BINCHKER) $(OBJ) $(OBJCHKER) $(LIBPATH) $(LIB) $(INC)
 	printf $(GREEN)" $@ compiled!\n"$(EOC)
 
 norme:
