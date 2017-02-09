@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 12:10:39 by fhuang            #+#    #+#             */
-/*   Updated: 2017/02/09 13:21:42 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/02/09 17:33:35 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,6 @@
 
 # ifndef ERROR_STRING
 #  define ERROR_STRING "Error\n"
-# endif
-
-# ifndef NUMBER_INSTRUCTIONS
-#  define NUMBER_INSTRUCTIONS 11
 # endif
 
 typedef struct	s_piles
@@ -57,11 +53,14 @@ typedef struct	s_instruction3
 	void		(*f)(int **src, int **dst, int *len_src, int *len_dst);
 }				t_instruction3;
 
-int				check_parameters(char **av);
+char**			check_parameters(char **av, int *len);
+
 int				call_instruction(t_piles *piles, const char *str);
+
+int				is_pile_sorted(int *pile, int len);
 int				is_game_finished(t_piles piles);
 
-void			init_piles(t_piles *piles, char **av, int ac);
+void			init_piles(t_piles *piles, char **av);
 void			destroy_piles(t_piles *piles);
 
 /*

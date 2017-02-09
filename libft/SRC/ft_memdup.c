@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tablen.c                                        :+:      :+:    :+:   */
+/*   ft_memdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/19 13:04:55 by fhuang            #+#    #+#             */
-/*   Updated: 2017/02/09 16:12:30 by fhuang           ###   ########.fr       */
+/*   Created: 2017/02/09 15:22:08 by fhuang            #+#    #+#             */
+/*   Updated: 2017/02/09 15:24:09 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t		ft_tablen(char **tab)
+void	*ft_memdup(const void *src, size_t n)
 {
-	int		i;
+	void	*ret;
 
-	i = 0;
-	while (tab && tab[i])
-		i++;
-	return (i);
+	ret = ft_memalloc(n);
+	if (ret)
+		ret = ft_memcpy(ret, src, n);
+	return (ret);
 }

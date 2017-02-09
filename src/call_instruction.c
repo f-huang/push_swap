@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 13:32:35 by fhuang            #+#    #+#             */
-/*   Updated: 2017/02/09 13:49:38 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/02/09 15:10:02 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,20 +88,18 @@ static int			print_debug(t_piles *piles, const char *str)
 	if (!ft_strequ(str, "print"))
 		return (ERROR);
 	ft_printf("^YELLOW^Pile a **%i**^EOC^\n", piles->len_a);
+	if (piles->len_a == 0)
+		ft_putendlcol("(null)", RED);
 	for (int i = 0; i < piles->len_a; i++)
 	{
-		// piles->pile_a[i] ? ft_putstr(GREEN) : 0;
-		ft_printf("[%i] -> [%i]\n", i, piles->pile_a[i]);
-		// piles->pile_a[i] ? ft_putstr(COLOR_RESET) : 0;
+		ft_printf("[%i] -> ^GREEN^[%i]^EOC^\n", i, piles->pile_a[i]);
 	}
 	ft_printf("^YELLOW^Pile b **%i**^EOC^\n", piles->len_b);
 	if (piles->len_b == 0)
 		ft_putendlcol("(null)", RED);
 	for (int i = 0; i < piles->len_b; i++)
 	{
-		// piles->pile_b[i] ? ft_putstr(GREEN) : 0;
-		ft_printf("[%i] -> [%i]\n", i, piles->pile_b[i]);
-		// piles->pile_b[i] ? ft_putstr(COLOR_RESET) : 0;
+		ft_printf("[%i] -> ^GREEN^[%i]^EOC^\n", i, piles->pile_b[i]);
 	}
 	return (GOOD);
 }
@@ -114,6 +112,9 @@ int			call_instruction(t_piles *piles, const char *str)
 		!call_instruction2(piles, str) &&
 		!call_instruction3(piles, str) &&
 		!print_debug(piles, str))
+	{
+		ft_putstr_fd(ERROR_STRING, 2);
 		return (ERROR);
+	}
 	return (GOOD);
 }

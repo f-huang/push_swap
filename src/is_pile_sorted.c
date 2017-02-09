@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tablen.c                                        :+:      :+:    :+:   */
+/*   is_pile_sorted.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/19 13:04:55 by fhuang            #+#    #+#             */
-/*   Updated: 2017/02/09 16:12:30 by fhuang           ###   ########.fr       */
+/*   Created: 2017/02/09 17:33:04 by fhuang            #+#    #+#             */
+/*   Updated: 2017/02/09 17:34:43 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "game.h"
 
-size_t		ft_tablen(char **tab)
+int	is_pile_sorted(int *pile, int len)
 {
 	int		i;
 
+	if (!pile || !*pile)
+		return (GOOD);
 	i = 0;
-	while (tab && tab[i])
-		i++;
-	return (i);
+	while (i < len - 1)
+	{
+		if (pile[i] > pile[i + 1])
+			return (ERROR);
+		++i;
+	}
+	return (GOOD);
 }
