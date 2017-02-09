@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 12:10:39 by fhuang            #+#    #+#             */
-/*   Updated: 2017/02/08 19:12:20 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/02/09 13:21:42 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,12 @@ typedef struct	s_instruction2
 	void		(*f)(int **pile, int len);
 }				t_instruction2;
 
+typedef struct	s_instruction3
+{
+	const char	*str;
+	void		(*f)(int **src, int **dst, int *len_src, int *len_dst);
+}				t_instruction3;
+
 int				check_parameters(char **av);
 int				call_instruction(t_piles *piles, const char *str);
 int				is_game_finished(t_piles piles);
@@ -62,8 +68,12 @@ void			destroy_piles(t_piles *piles);
 **	INSTRUCTIONS
 */
 
+void			push_to(int **src, int **dst, int *len_src, int *len_dst);
 void			swap(int **pile, int len);
 void			rotate(int **pile, int len);
 void			reverse_rotate(int **pile, int len);
+void			swap_both_piles(t_piles *piles);
+void			rotate_both_piles(t_piles *piles);
+void			reverse_rotate_both_piles(t_piles *piles);
 
 #endif

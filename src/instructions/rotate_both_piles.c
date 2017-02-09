@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   destroy_piles.c                                    :+:      :+:    :+:   */
+/*   rotate_both_piles.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/08 17:48:12 by fhuang            #+#    #+#             */
-/*   Updated: 2017/02/09 13:00:02 by fhuang           ###   ########.fr       */
+/*   Created: 2017/02/09 13:19:35 by fhuang            #+#    #+#             */
+/*   Updated: 2017/02/09 13:22:32 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game.h"
-#include "libft.h"
 
-void	destroy_piles(t_piles *piles)
+void	rotate_both_piles(t_piles *piles)
 {
-	if (piles->sorted_pile)
-		ft_memdel((void*)&piles->sorted_pile);
-	ft_memdel((void*)&piles->pile_a);
-	ft_memdel((void*)&piles->pile_b);
-	ft_bzero(piles, sizeof(piles));
-	piles = NULL;
+	rotate(&piles->pile_a, piles->len_a);
+	rotate(&piles->pile_b, piles->len_b);
 }

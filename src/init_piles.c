@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 17:26:59 by fhuang            #+#    #+#             */
-/*   Updated: 2017/02/08 17:42:38 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/02/09 13:00:14 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	init_piles(t_piles *piles, char **av, int ac)
 	ft_bzero(piles, sizeof(t_piles));
 	piles->pile_a = (int*)ft_memalloc(sizeof(int) * ac);
 	piles->pile_b = (int*)ft_memalloc(sizeof(int) * ac);
-	piles->sorted_pile = (int*)ft_memalloc(sizeof(int) * ac);
 	piles->len = ac - 1;
 	piles->len_a = piles->len;
 	i = 1;

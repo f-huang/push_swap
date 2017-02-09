@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 20:20:27 by fhuang            #+#    #+#             */
-/*   Updated: 2017/02/08 19:08:48 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/02/09 14:01:01 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int			main(int ac, char **av)
 		if (!call_instruction(&piles, line))
 		{
 			ft_putstr_fd(ERROR_STRING, 2);
-			return (1);
 		}
 		ft_strdel(&line);
 	}

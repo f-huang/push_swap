@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 18:44:06 by fhuang            #+#    #+#             */
-/*   Updated: 2017/02/08 19:04:41 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/02/09 13:33:07 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@ void	rotate(int **pile, int len)
 	int		tmp;
 	int		i;
 
-	if (!*pile || len < 2)
+	if (!pile || len < 2)
 		return ;
 	tmp = (*pile)[0];
 	i = 0;
@@ -24,4 +24,5 @@ void	rotate(int **pile, int len)
 		(*pile)[i] = (*pile)[i + 1];
 		++i;
 	}
+	(*pile)[i] = tmp;
 }

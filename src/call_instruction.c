@@ -6,13 +6,29 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 13:32:35 by fhuang            #+#    #+#             */
-/*   Updated: 2017/02/08 19:06:33 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/02/09 13:49:38 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game.h"
 #include "libft.h"
 
+static int	call_instruction3(t_piles *piles, const char *str)
+{
+	static const t_instruction3	instructions[] = {
+		{"pa", push_to},
+		{"pb", push_to},
+		{NULL, NULL}
+	};
+
+	if (ft_strequ(str, instructions[0].str))
+		push_to(&piles->pile_b, &piles->pile_a, &piles->len_b, &piles->len_a);
+	else if (ft_strequ(str, instructions[1].str))
+		push_to(&piles->pile_a, &piles->pile_b, &piles->len_a, &piles->len_b);
+	else
+		return (ERROR);
+	return (GOOD);
+}
 static int	call_instruction2(t_piles *piles, const char *str)
 {
 	static const t_instruction2	instructions[] = {
@@ -43,12 +59,10 @@ static int	call_instruction2(t_piles *piles, const char *str)
 	}
 	return (ERROR);
 }
-/*
+
 static int	call_instruction1(t_piles *piles, const char *str)
 {
-	static const t_instruction2	instructions[] = {
-		{"pa", push_to_a},
-		{"pb", push_to_b},
+	static const t_instruction1	instructions[] = {
 		{"ss", swap_both_piles},
 		{"rr", rotate_both_piles},
 		{"rrr", reverse_rotate_both_piles},
@@ -59,7 +73,7 @@ static int	call_instruction1(t_piles *piles, const char *str)
 	i = 0;
 	while (instructions[i].str)
 	{
-		if (ft_strequ(str, instructionsp[i].str))
+		if (ft_strequ(str, instructions[i].str))
 		{
 			instructions[i].f(piles);
 			return (GOOD);
@@ -68,13 +82,38 @@ static int	call_instruction1(t_piles *piles, const char *str)
 	}
 	return (ERROR);
 }
-*/
+
+static int			print_debug(t_piles *piles, const char *str)
+{
+	if (!ft_strequ(str, "print"))
+		return (ERROR);
+	ft_printf("^YELLOW^Pile a **%i**^EOC^\n", piles->len_a);
+	for (int i = 0; i < piles->len_a; i++)
+	{
+		// piles->pile_a[i] ? ft_putstr(GREEN) : 0;
+		ft_printf("[%i] -> [%i]\n", i, piles->pile_a[i]);
+		// piles->pile_a[i] ? ft_putstr(COLOR_RESET) : 0;
+	}
+	ft_printf("^YELLOW^Pile b **%i**^EOC^\n", piles->len_b);
+	if (piles->len_b == 0)
+		ft_putendlcol("(null)", RED);
+	for (int i = 0; i < piles->len_b; i++)
+	{
+		// piles->pile_b[i] ? ft_putstr(GREEN) : 0;
+		ft_printf("[%i] -> [%i]\n", i, piles->pile_b[i]);
+		// piles->pile_b[i] ? ft_putstr(COLOR_RESET) : 0;
+	}
+	return (GOOD);
+}
+
 int			call_instruction(t_piles *piles, const char *str)
 {
 	if (!str)
 		return (ERROR);
-//	if (!call_instruction1(piles, str) &&
-	if (!call_instruction2(piles, str))
+	if (!call_instruction1(piles, str) &&
+		!call_instruction2(piles, str) &&
+		!call_instruction3(piles, str) &&
+		!print_debug(piles, str))
 		return (ERROR);
 	return (GOOD);
 }

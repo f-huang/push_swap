@@ -6,7 +6,7 @@
 #    By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 15:45:39 by fhuang            #+#    #+#              #
-#    Updated: 2017/02/08 19:06:50 by fhuang           ###   ########.fr        #
+#    Updated: 2017/02/09 13:28:00 by fhuang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,17 +23,21 @@ BINDIR	:=	bin/
 INCDIR	:=	include/
 LIBDIR	:=	libft/
 INSTRUCTDIR	:=	instructions/
-SRC		:=	$(SRCDIR)call_instruction.c		\
-			$(SRCDIR)check_parameters.c		\
-			$(SRCDIR)destroy_piles.c		\
-			$(SRCDIR)init_piles.c			\
+SRC		:=	$(SRCDIR)$(INSTRUCTDIR)push_to.c		\
 			$(SRCDIR)$(INSTRUCTDIR)reverse_rotate.c	\
-			$(SRCDIR)$(INSTRUCTDIR)rotate.c	\
-			$(SRCDIR)$(INSTRUCTDIR)swap.c	\
+			$(SRCDIR)$(INSTRUCTDIR)reverse_rotate_both_piles.c\
+			$(SRCDIR)$(INSTRUCTDIR)rotate.c			\
+			$(SRCDIR)$(INSTRUCTDIR)rotate_both_piles.c\
+			$(SRCDIR)$(INSTRUCTDIR)swap.c			\
+			$(SRCDIR)$(INSTRUCTDIR)swap_both_piles.c\
+			$(SRCDIR)call_instruction.c				\
+			$(SRCDIR)check_parameters.c				\
+			$(SRCDIR)destroy_piles.c				\
+			$(SRCDIR)init_piles.c					\
 			$(SRCDIR)is_game_finished.c
 OBJ		:=	$(SRC:$(SRCDIR)%.c=$(OBJDIR)%.o)
 INC		:=	-I./$(INCDIR) -I./$(LIBDIR)$(INCDIR)
-LIBPATH	:=	-L./$(LIBDIR)lib -lft
+LIBPATH	:=	-L./$(LIBDIR)lib -lft -lftprintf
 CACHEF	:=	.cache_exists
 # ====================
 

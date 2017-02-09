@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 18:50:55 by fhuang            #+#    #+#             */
-/*   Updated: 2017/02/08 18:52:38 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/02/09 13:10:41 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	swap(int **pile, int len)
 {
-	if (!*pile || len < 2)
+	if (!pile || len < 2)
 		return ;
 	len = (*pile)[0];
 	(*pile)[0] = (*pile)[1];
