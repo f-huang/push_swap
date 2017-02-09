@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 20:20:27 by fhuang            #+#    #+#             */
-/*   Updated: 2017/02/09 17:09:06 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/02/09 18:53:20 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int			main(int ac, char **av)
 	}
 	init_piles(&piles, av);
 	line = NULL;
-	while (ft_putstrcol("checker> ", CYAN), (ret = read_stdin(&line)))
+	while ((ret = read_stdin(&line)))
 	{
 		if (ret == -1)
 			return (1);
