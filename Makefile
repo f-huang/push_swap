@@ -6,7 +6,7 @@
 #    By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 15:45:39 by fhuang            #+#    #+#              #
-#    Updated: 2017/02/09 17:33:55 by fhuang           ###   ########.fr        #
+#    Updated: 2017/03/25 17:43:49 by fhuang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,15 +71,17 @@ OBJDIRPSWAP	:=	$(OBJDIR)$(PROG2)/
 BINPSWAP	:=	$(PROG2)
 SRCPSWAP	:=	$(DIRPSWAP)main.c				\
 				$(DIRPSWAP)init_sorted_pile.c	\
-				$(DIRPSWAP)resolve_game.c
+				$(DIRPSWAP)resolve_game.c		\
+				$(DIRPSWAP)get_tab_median.c		
 OBJPSWAP	:=	$(SRCPSWAP:$(DIRPSWAP)%.c=$(OBJDIRPSWAP)%.o)
 # ===================
 
 
-.PHONY: all libft checker norme clean fclean re
+.PHONY: all libft push_swap checker norme clean fclean re
 .SILENT:
 
 all: libft push_swap checker
+	echo ""
 
 $(OBJDIR)%.o: $(SRCDIR)%.c $(CACHEF)
 	$(CC) $(CFLAGS) -c $< -o $@ $(INC)
@@ -100,11 +102,9 @@ libft:
 
 checker: $(OBJ) $(OBJCHKER)
 	$(CC) $(CFLAGS) -o $(BINCHKER) $(OBJ) $(OBJCHKER) $(LIBPATH) $(LIB) $(INC)
-	printf $(GREEN)" $@ compiled!\n"$(EOC)
 
 push_swap: $(OBJ) $(OBJPSWAP)
 	$(CC) $(CFLAGS) -o $(BINPSWAP) $(OBJ) $(OBJPSWAP) $(LIBPATH) $(LIB) $(INC)
-	printf $(GREEN)" $@ compiled!\n"$(EOC)
 
 norme:
 	norminette $(SRCDIR) $(INCDIR) | grep -v Norme -B1 || true
@@ -118,6 +118,8 @@ clean:
 fclean: clean
 	make -C $(LIBDIR) fclean
 	rm -f $(PROG1)
+	rm -f $(PROG2)
 	printf $(RED)"$(PROG1) removed\n"$(EOC)
+	printf $(RED)"$(PROG2) removed\n"$(EOC)
 
 re: fclean all

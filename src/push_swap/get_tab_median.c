@@ -1,36 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_to.c                                          :+:      :+:    :+:   */
+/*   get_tab_median.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/09 13:08:41 by fhuang            #+#    #+#             */
-/*   Updated: 2017/03/25 17:56:38 by fhuang           ###   ########.fr       */
+/*   Created: 2017/03/25 17:41:11 by fhuang            #+#    #+#             */
+/*   Updated: 2017/03/25 18:49:14 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "game.h"
 #include "libft.h"
 
-void	push_to(int **src, int **dst, uint16_t *len_src, uint16_t *len_dst)
+int		get_tab_median(int *tab, uint16_t len)
 {
+	int		*tmp;
 	int		i;
+	int		swap;
+	int		median;
 
-	if (!src || !dst || *len_src <= 0)
-		return ;
-	++(*len_dst);
-	i = *len_dst - 1;
-	while (i > 0)
-	{
-		(*dst)[i] = (*dst)[i - 1];
-		--i;
-	}
-	(*dst)[0] = (*src)[0];
+	tmp = ft_memalloc(sizeof(int) * len);
 	i = 0;
-	while (i < *len_src - 1)
+	while (i < len)
 	{
-		(*src)[i] = (*src)[i + 1];
+		tmp[i] = tab[i];
 		++i;
 	}
-	--(*len_src);
+	i = 0;
+	while (i < len - 1)
+	{
+		if (tmp[i] > tmp[i + 1])
+		{
+			swap = tmp[i];
+			tmp[i] = tmp[i + 1];
+			tmp[i + 1] = swap;
+			i = -1;
+		}
+		++i;
+	}
+	median = tmp[len / 2];
+	ft_memdel((void*)&tmp);
+	return (median);
 }

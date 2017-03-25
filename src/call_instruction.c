@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 13:32:35 by fhuang            #+#    #+#             */
-/*   Updated: 2017/02/09 15:10:02 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/03/25 17:54:37 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,35 +83,13 @@ static int	call_instruction1(t_piles *piles, const char *str)
 	return (ERROR);
 }
 
-static int			print_debug(t_piles *piles, const char *str)
-{
-	if (!ft_strequ(str, "print"))
-		return (ERROR);
-	ft_printf("^YELLOW^Pile a **%i**^EOC^\n", piles->len_a);
-	if (piles->len_a == 0)
-		ft_putendlcol("(null)", RED);
-	for (int i = 0; i < piles->len_a; i++)
-	{
-		ft_printf("[%i] -> ^GREEN^[%i]^EOC^\n", i, piles->pile_a[i]);
-	}
-	ft_printf("^YELLOW^Pile b **%i**^EOC^\n", piles->len_b);
-	if (piles->len_b == 0)
-		ft_putendlcol("(null)", RED);
-	for (int i = 0; i < piles->len_b; i++)
-	{
-		ft_printf("[%i] -> ^GREEN^[%i]^EOC^\n", i, piles->pile_b[i]);
-	}
-	return (GOOD);
-}
-
 int			call_instruction(t_piles *piles, const char *str)
 {
 	if (!str)
 		return (ERROR);
 	if (!call_instruction1(piles, str) &&
 		!call_instruction2(piles, str) &&
-		!call_instruction3(piles, str) &&
-		!print_debug(piles, str))
+		!call_instruction3(piles, str))
 	{
 		ft_putstr_fd(ERROR_STRING, 2);
 		return (ERROR);

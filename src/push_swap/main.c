@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 15:09:00 by fhuang            #+#    #+#             */
-/*   Updated: 2017/02/09 17:06:34 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/03/25 18:28:50 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,13 @@ int		main(int ac, char **av)
 
 	if (ac == 1 || !(av = check_parameters(av, &piles.len)))
 	{
-		ft_putstr_fd(ERROR_STRING, 2);
+		!av ? ft_putstr_fd(ERROR_STRING, 2) : 0;
 		return (1);
 	}
 	init_piles(&piles, av);
 	init_sorted_pile(&piles.sorted_pile, piles.pile_a, piles.len);
-	resolve_game(&piles);
+
+	resolve_game(&piles, piles.len);
 	destroy_piles(&piles);
 	ft_tabfree(&av);
 	return (0);

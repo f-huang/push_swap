@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 20:20:27 by fhuang            #+#    #+#             */
-/*   Updated: 2017/02/09 18:53:20 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/02/10 15:50:05 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int			main(int ac, char **av)
 	char	*line;
 	t_piles	piles;
 
-	if (ac == 1 || !(av = check_parameters(av, &piles.len)))
+	if (ac < 2 || !(av = check_parameters(av, &piles.len)))
 	{
-		ft_putstr_fd(ERROR_STRING, 2);
+		!av ? ft_putstr_fd(ERROR_STRING, 2) : 0;
 		return (1);
 	}
 	init_piles(&piles, av);

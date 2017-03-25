@@ -6,71 +6,78 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:07:05 by fhuang            #+#    #+#             */
-/*   Updated: 2017/02/09 19:03:19 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/03/25 19:08:35 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game.h"
+#include "push_swap.h"
 #include "libft.h"
 
-static void		finish_game(t_piles *piles)
+static void	print_piles(t_piles *piles)
 {
-	while (piles->len_b > 0)
+	ft_putendlcol("PILE A", GREEN);
+	for (int i = 0 ; i < piles->len_a; i++)
 	{
-		push_to(&piles->pile_b, &piles->pile_a, &piles->len_b, &piles->len_a);
-		ft_putendl("pa");
+		ft_printf("%d ", piles->pile_a[i]);
 	}
+	ft_putendlcol("\nPILE B", GREEN);
+	for (int i = 0 ; i < piles->len_b; i++)
+	{
+		ft_printf("%d ", piles->pile_b[i]);
+	}
+	ft_putchar('\n');
 }
 
-static _Bool	is_reverse_faster(t_piles piles, int sorted_index)
+void		split_a_in_2(t_piles *piles, uint16_t len)
 {
+	int		median;
 	int		i;
 
+	median = get_tab_median(piles->pile_a, len);
+	ft_printf("^RED^Median : %i - Len : %i^EOC^\n", median, len);
 	i = 0;
-	while (i < piles.len_a)
+	while (i < len)
 	{
-		if (piles.pile_a[i] == piles.sorted_pile[sorted_index])
-			break ;
-		// if (piles.pile_a[i] < piles.pile_a[i + 1])
-			// sorted++;
+		if (piles->pile_a[0] < median)
+		{
+			call_instruction(piles, "pb");
+		}
+		else //OPTI
+			call_instruction(piles, "ra");
 		++i;
 	}
-	return (i > piles.len_a / 2 ? true : false);
-	// return (sorted < piles.len - sorted ? false : true);
 }
 
-void			resolve_game(t_piles *piles)
+static void push_b_in_a(t_piles *piles, uint16_t len)
 {
+	int		median;
 	int		i;
-	_Bool	reverse;
 
+	median = get_tab_median(piles->pile_b, len);
+	ft_printf("^MAGENTA^Median : %i - Len : %i^EOC^\n", median, len);
+	i = 0;
+	while (i < len)
+	{
+		call_instruction(piles, "pa");
+		++i;
+	}
+}
+
+void		resolve_game(t_piles *piles, uint16_t len)
+{
 	if (!piles || !piles->pile_a || !piles->pile_b || !piles->sorted_pile)
 		return ;
-	i = 0;
-	reverse = is_reverse_faster(*piles, i);
-	while (!is_game_finished(*piles))
+	if (len == 2)
 	{
-		if (is_pile_sorted(piles->pile_a, piles->len_a))
-		{
-			finish_game(piles);
-			// break ;
-		}
-		if (piles->pile_a[0] != piles->sorted_pile[i])
-		{
-			reverse ? reverse_rotate(&piles->pile_a, piles->len_a) :
-				rotate(&piles->pile_a, piles->len_a);
-			ft_putendl(reverse ? "rra" : "ra");
-		}
-		else
-		{
-			push_to(&piles->pile_a, &piles->pile_b, &piles->len_a, &piles->len_b);
-			ft_putendl("pb");
-			++i;
-			reverse = is_reverse_faster(*piles, i);
-		}
+		if (piles->pile_a[0] > piles->pile_a[1])
+			call_instruction(piles, "sa");
+		return ;
 	}
-	// ft_putstr(GREEN);
-	// for (int i = 0; i < piles->len_a; i++)
-	// 	ft_putnbrendl(piles->pile_a[i]);
-	// ft_putstr(COLOR_RESET);
+	ft_printf("^BLUE^Len : %i^EOC^\n", len);
+	split_a_in_2(piles, len);
+	print_piles(piles);
+	resolve_game(piles, len / 2 + len % 2);
+	push_b_in_a(piles, len / 2);
+	print_piles(piles);
 }
