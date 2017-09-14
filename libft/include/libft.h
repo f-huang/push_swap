@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 11:48:08 by fhuang            #+#    #+#             */
-/*   Updated: 2017/02/09 15:24:47 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/09/14 19:28:15 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define CYAN "\x1b[36m"
 # define COLOR_RESET "\x1b[0m"
 
+# define FT_DEBUG(FORMAT, ...) (ft_printf("[DEBUG]  "FORMAT"\n", ##__VA_ARGS__))
 /*
 **	GNL.H
 */

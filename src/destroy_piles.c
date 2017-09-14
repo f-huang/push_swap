@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 17:48:12 by fhuang            #+#    #+#             */
-/*   Updated: 2017/02/09 13:00:02 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/09/14 18:33:21 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,11 @@ void	destroy_piles(t_piles *piles)
 {
 	if (piles->sorted_pile)
 		ft_memdel((void*)&piles->sorted_pile);
-	ft_memdel((void*)&piles->pile_a);
-	ft_memdel((void*)&piles->pile_b);
-	ft_bzero(piles, sizeof(piles));
+	if (piles->pile_a)
+		ft_memdel((void*)&piles->pile_a);
+	if (piles->pile_b)
+		ft_memdel((void*)&piles->pile_b);
+	if (piles)
+		ft_bzero(piles, sizeof(piles));
 	piles = NULL;
 }
