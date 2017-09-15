@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:07:05 by fhuang            #+#    #+#             */
-/*   Updated: 2017/09/15 13:49:26 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/09/15 14:01:00 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	is_there_random_numbers_at_the_end_of_pile(int *pile, uint16_t len)
 	return (0);
 }
 
-static void	push_smaller_integer_to_b(t_piles *piles, uint16_t len)
+static void	push_smaller_integer_to_b(t_piles *piles, uint16_t len, int from_sort_b)
 {
 	int		median;
 	int		count;
@@ -38,7 +38,7 @@ static void	push_smaller_integer_to_b(t_piles *piles, uint16_t len)
 	int		should_rotate;
 
 	median = get_tab_median(piles->pile_a, len);
-	// should_rotate = are_smaller_number_at_the_start(piles->pile_a, piles->len_a, median);
+	should_rotate = !from_sort_b && are_smaller_number_at_the_start(piles->pile_a, piles->len_a, median);
 	nb_rotate = 0;
 	count = 0;
 	FT_DEBUG("should_rotate = %s", should_rotate ? "true" : "false");
@@ -60,13 +60,13 @@ static void	push_smaller_integer_to_b(t_piles *piles, uint16_t len)
 		}
 	}
 	print_piles(piles);
-	FT_DEBUG("%i to rotate -> %i", nb_rotate, is_there_random_numbers_at_the_end_of_pile(piles->pile_a, piles->len_a));
+	FT_DEBUG("%i to rotate -> %i / %i", nb_rotate, from_sort_b, is_there_random_numbers_at_the_end_of_pile(piles->pile_a, piles->len_a));
 	// while (is_there_random_numbers_at_the_end_of_pile(piles->pile_a, piles->len_a) && nb_rotate)
-	while (nb_rotate)
+	while (from_sort_b && is_there_random_numbers_at_the_end_of_pile(piles->pile_a, piles->len_a) && nb_rotate)
 	{
 		total++;
-		// !should_rotate ? rotate(&piles->pile_a, piles->len_a) :\
-			// reverse_rotate(&piles->pile_a, piles->len_a);
+		// should_rotate ? reverse_rotate(&piles->pile_a, piles->len_a):\
+			// rotate(&piles->pile_a, piles->len_a);
 		reverse_rotate(&piles->pile_a, piles->len_a);
 		nb_rotate--;
 	}
@@ -97,13 +97,13 @@ static void	sort_b_by_pushing_to_a(t_piles *piles, uint16_t len)
 	if (!is_pile_sorted(piles->pile_a, piles->len_a))
 	{
 		FT_DEBUG("RESOLVE");
-		resolve_game(piles, len);
+		resolve_game(piles, len, 1);
 	}
 	ft_memdel((void*)&tmp_pile);
 
 }
 
-void		resolve_game(t_piles *piles, uint16_t len)
+void		resolve_game(t_piles *piles, uint16_t len, int from_sort_b)
 {
 	if (is_game_finished(*piles))
 		return ;
@@ -117,9 +117,9 @@ void		resolve_game(t_piles *piles, uint16_t len)
 	else if (len > 2)
 	{
 		FT_DEBUG("resole len -> %i and pile sorted -> %s", len, is_pile_sorted(piles->pile_a, piles->len_a) ? "true" : "false");
-		push_smaller_integer_to_b(piles, len);
+		push_smaller_integer_to_b(piles, len, from_sort_b);
 		print_piles(piles);
-		resolve_game(piles, len / 2 + len % 2);
+		resolve_game(piles, len / 2 + len % 2, from_sort_b);
 		FT_DEBUG("Depiling .. len = %i : ", len / 2);
 		sort_b_by_pushing_to_a(piles, len / 2);
 	}
