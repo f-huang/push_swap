@@ -6,7 +6,7 @@
 #    By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 15:45:39 by fhuang            #+#    #+#              #
-#    Updated: 2017/09/15 13:41:54 by fhuang           ###   ########.fr        #
+#    Updated: 2017/09/15 16:03:56 by fhuang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ SRC		:=	$(SRCDIR)$(INSTRUCTDIR)push_to.c		\
 			$(SRCDIR)destroy_piles.c				\
 			$(SRCDIR)init_piles.c					\
 			$(SRCDIR)is_game_finished.c				\
+			$(SRCDIR)is_pile_reverse_sorted.c		\
 			$(SRCDIR)is_pile_sorted.c
 OBJ		:=	$(SRC:$(SRCDIR)%.c=$(OBJDIR)%.o)
 INC		:=	-I./$(INCDIR) -I./$(LIBDIR)$(INCDIR)
@@ -72,6 +73,7 @@ BINPSWAP	:=	$(PROG2)
 SRCPSWAP	:=	$(DIRPSWAP)main.c				\
 				$(DIRPSWAP)are_smaller_number_at_the_start.c\
 				$(DIRPSWAP)init_sorted_pile.c	\
+				$(DIRPSWAP)sort_three_items.c		\
 				$(DIRPSWAP)resolve_game.c		\
 				$(DIRPSWAP)get_tab_median.c		\
 				$(DIRPSWAP)print_piles.c

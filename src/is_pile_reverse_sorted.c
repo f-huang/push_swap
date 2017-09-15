@@ -1,33 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   are_smaller_number_at_the_start.c                  :+:      :+:    :+:   */
+/*   is_pile_reverse_sorted.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/15 13:30:42 by fhuang            #+#    #+#             */
-/*   Updated: 2017/09/15 14:28:53 by fhuang           ###   ########.fr       */
+/*   Created: 2017/02/09 17:33:04 by fhuang            #+#    #+#             */
+/*   Updated: 2017/09/15 14:48:07 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game.h"
-#include "push_swap.h"
 
-#include "libft.h"
-int	are_smaller_number_at_the_start(int *pile, uint16_t len, int median)
+static int	is_pile_reverse_ssorted(int *pile, uint16_t len)
 {
-	int		count;
 	int		i;
-	int		size;
 
-	count = 0;
 	i = 0;
-	size = len / 2;
-	while (i < size)
+	while (i < len - 1)
 	{
-		if (median > pile[i])
-			++count;
+		if (pile[i] < pile[i + 1])
+			return (ERROR) ;
 		++i;
 	}
-	return (count >= size / 2 + size % 2 ? 1 : 0);
+	return (GOOD);
+}
+
+int			is_pile_reverse_sorted(int *pile, uint16_t len)
+{
+	if (len == 0 || len == 1)
+		return (GOOD);
+	if (!is_pile_reverse_ssorted(pile, len))
+		return (ERROR);
+	return (GOOD);
 }

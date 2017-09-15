@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 12:10:39 by fhuang            #+#    #+#             */
-/*   Updated: 2017/09/14 19:16:48 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/09/15 14:42:02 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ char**			check_parameters(char **av, uint16_t *len);
 int				call_instruction(t_piles *piles, const char *str);
 
 int				is_pile_sorted(int *pile, uint16_t len);
+int				is_pile_reverse_sorted(int *pile, uint16_t len);
 int				is_game_finished(t_piles piles);
 
 void			init_piles(t_piles *piles, char **av);
