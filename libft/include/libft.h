@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 11:48:08 by fhuang            #+#    #+#             */
-/*   Updated: 2017/09/14 19:28:15 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/09/15 12:13:00 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,6 +184,12 @@ char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 
 size_t				ft_wcslen(const wchar_t *wstr);
 void				ft_exit(char *str);
+
+/*
+**	INT TAB FUNCTIONS
+*/
+
+int					*ft_intabndup(int *tab_to_dup, size_t start, size_t end);
 
 /*
 **	TAB FUNCTIONS

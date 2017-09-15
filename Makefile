@@ -6,7 +6,7 @@
 #    By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 15:45:39 by fhuang            #+#    #+#              #
-#    Updated: 2017/09/14 19:18:01 by fhuang           ###   ########.fr        #
+#    Updated: 2017/09/15 13:41:54 by fhuang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,6 +70,7 @@ DIRPSWAP	:=	$(SRCDIR)$(PROG2)/
 OBJDIRPSWAP	:=	$(OBJDIR)$(PROG2)/
 BINPSWAP	:=	$(PROG2)
 SRCPSWAP	:=	$(DIRPSWAP)main.c				\
+				$(DIRPSWAP)are_smaller_number_at_the_start.c\
 				$(DIRPSWAP)init_sorted_pile.c	\
 				$(DIRPSWAP)resolve_game.c		\
 				$(DIRPSWAP)get_tab_median.c		\

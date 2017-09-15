@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 15:09:00 by fhuang            #+#    #+#             */
-/*   Updated: 2017/09/14 19:19:32 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/09/15 11:49:18 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "push_swap.h"
 #include "libft.h"
 
+extern int total;
 int		main(int ac, char **av)
 {
 	t_piles	piles;
@@ -34,5 +35,6 @@ int		main(int ac, char **av)
 	}
 	destroy_piles(&piles);
 	ft_tabfree(&av);
+	FT_DEBUG("TOTAL = %i", total);
 	return (0);
 }

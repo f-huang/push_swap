@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_intabndup.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/09 15:25:31 by fhuang            #+#    #+#             */
-/*   Updated: 2017/09/15 13:39:40 by fhuang           ###   ########.fr       */
+/*   Created: 2017/09/15 11:11:38 by fhuang            #+#    #+#             */
+/*   Updated: 2017/09/15 11:17:36 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include <stddef.h>
+#include "libft.h"
 
-# include <inttypes.h>
-# include <stddef.h>
+int		*ft_intabndup(int *tab_to_dup, size_t start, size_t end)
+{
+	size_t	i;
+	size_t	size;
+	int		*ret;
 
-void	init_sorted_pile(int **sorted_pile, int *pile_a, int len);
-void	resolve_game(t_piles *piles, uint16_t len);
-
-int		get_tab_median(int *tab, uint16_t len);
-
-int		are_smaller_number_at_the_start(int *pile, uint16_t len, int median);
-
-void	print_piles(t_piles *piles);
-
-#endif
+	size = end - start;
+	if (!(ret = (int*)ft_memalloc(sizeof(int) * size)))
+		return (NULL);
+	i = 0;
+	while (start < end)
+	{
+		ret[i] = tab_to_dup[start];
+		i++;
+		start++;
+	}
+	return (ret);
+}
