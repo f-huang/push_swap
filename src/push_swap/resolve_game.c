@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:07:05 by fhuang            #+#    #+#             */
-/*   Updated: 2017/09/21 22:37:55 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/09/21 23:12:32 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,19 +48,6 @@ static void	push_smaller_integer_to_b(t_piles *piles, uint16_t len)
 	}
 }
 
-static int	are_bigger_numbers_presents(int *pile, uint16_t len, int comparator)
-{
-	int		i = 0;
-
-	while (i < len)
-	{
-		if (pile[i] > comparator)
-			return (1);
-		++i;
-	}
-	return (0);
-}
-
 static void	sort_b_by_pushing_to_a(t_piles *piles, uint16_t len)
 {
 	int		count;
@@ -89,7 +76,7 @@ static void	sort_b_by_pushing_to_a(t_piles *piles, uint16_t len)
 				--total;
 		}
 		total++;
-		nb_rotate--;
+		count++;
 	}
 	if (!is_pile_sorted(piles->pile_a, piles->len_a))
 	{
@@ -98,28 +85,11 @@ static void	sort_b_by_pushing_to_a(t_piles *piles, uint16_t len)
 
 }
 
-void		resolve_game(t_piles *piles, uint16_t len, int from_sort_b)
+void		resolve_game(t_piles *piles, uint16_t len)
 {
 	if (is_game_finished(*piles))
 		return ;
-	if (piles->len_a == 3)
-	{
-		ft_putendlcol("sort_three_items()", RED);
-		sort_three_items(&piles->pile_a, piles->len_a);
-		print_piles(piles);
-	}
-	if (is_pile_sorted(piles->pile_a, piles->len_a) &&\
-		is_pile_reverse_sorted(piles->pile_b, piles->len_b) &&
-		piles->len_b > 0 && piles->pile_a[0] > piles->pile_b[0])
-	{
-		while (piles->len_b)
-		{
-			push_to(&piles->pile_b, &piles->pile_a, &piles->len_b, &piles->len_a);
-			total++;
-		}
-		return ;
-	}
-	if (len <= 3 && piles->pile_a[0] > piles->pile_a[1])
+	if (len == 2 && piles->pile_a[0] > piles->pile_a[1])
 	{
 		total++;
 		swap(&piles->pile_a, piles->len_a);
@@ -131,8 +101,8 @@ void		resolve_game(t_piles *piles, uint16_t len, int from_sort_b)
 		resolve_game(piles, len / 2 + len % 2);
 		FT_DEBUG("Depil : %i -> %i", len, len/2);
 		print_piles(piles);
-		FT_DEBUG("-------------------");
 		sort_b_by_pushing_to_a(piles, len / 2);
+		FT_DEBUG("-------------------");
 	}
 
 }
