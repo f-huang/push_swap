@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 15:09:00 by fhuang            #+#    #+#             */
-/*   Updated: 2017/09/15 11:49:18 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/09/21 21:56:44 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int		main(int ac, char **av)
 		print_piles(&piles);
 		ft_putendlcol("_______________________", RED);
 		resolve_game(&piles, piles.len);
+		print_piles(&piles);
 	}
 	destroy_piles(&piles);
 	ft_tabfree(&av);
