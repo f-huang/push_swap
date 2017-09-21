@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:07:05 by fhuang            #+#    #+#             */
-/*   Updated: 2017/09/21 22:09:08 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/09/21 22:37:55 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,6 @@
 #include "libft.h"
 
 int	total = 0;
-
-static int	is_there_random_numbers_at_the_end_of_pile(int *pile, uint16_t len)
-{
-	int		i;
-
-	i = 0;
-	while (i < len - 1)
-	{
-		if (pile[i] > pile[i + 1] && i > 3)
-			return (1);
-		i++;
-	}
-	return (0);
-}
 
 static void	push_smaller_integer_to_b(t_piles *piles, uint16_t len)
 {
@@ -75,9 +61,20 @@ static void	sort_b_by_pushing_to_a(t_piles *piles, uint16_t len)
 	count = 0;
 	while (count < len)
 	{
-		if (len > 1 && piles->pile_b[0] < piles->pile_b[1])
-			swap(&piles->pile_b, piles->len_b);
 		push_to(&piles->pile_b, &piles->pile_a, &piles->len_b, &piles->len_a);
+		if (len > 1) {
+			int swap_a = piles->pile_a[0] > piles->pile_a[1];
+			int swap_b = piles->pile_b[0] < piles->pile_b[1];
+			++total;
+			if (swap_a && swap_b)
+				swap_both_piles(piles);
+			else if (swap_a)
+				swap(&piles->pile_a, piles->len_a);
+			else if (swap_b)
+				swap(&piles->pile_b, piles->len_b);
+			else
+				--total;
+		}
 		total++;
 		count++;
 	}
@@ -103,7 +100,7 @@ void		resolve_game(t_piles *piles, uint16_t len)
 		print_piles(piles);
 		push_smaller_integer_to_b(piles, len);
 		resolve_game(piles, len / 2 + len % 2);
-		FT_DEBUG("Depil : %i", len);
+		FT_DEBUG("Depil : %i -> %i", len, len/2);
 		print_piles(piles);
 		FT_DEBUG("-------------------");
 		sort_b_by_pushing_to_a(piles, len / 2);
