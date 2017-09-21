@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 15:25:31 by fhuang            #+#    #+#             */
-/*   Updated: 2017/09/21 23:01:59 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/09/21 23:50:21 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stddef.h>
 
 void	init_sorted_pile(int **sorted_pile, int *pile_a, int len);
-void	resolve_game(t_piles *piles, uint16_t len);
+void	resolve_game(t_piles *piles, uint16_t len, int from_sort_b);
 
 int		get_tab_median(int *tab, uint16_t len);
 

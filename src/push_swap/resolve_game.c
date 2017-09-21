@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:07:05 by fhuang            #+#    #+#             */
-/*   Updated: 2017/09/21 23:12:32 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/09/21 23:51:13 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 int	total = 0;
 
-static void	push_smaller_integer_to_b(t_piles *piles, uint16_t len)
+static void	push_smaller_integer_to_b(t_piles *piles, uint16_t len, int from_sort_b)
 {
 	int		median;
 	int		count;
@@ -40,7 +40,8 @@ static void	push_smaller_integer_to_b(t_piles *piles, uint16_t len)
 			nb_rotate++;
 		}
 	}
-	while (nb_rotate)
+	FT_DEBUG("%i", nb_rotate);
+	while (from_sort_b && nb_rotate)
 	{
 		total++;
 		reverse_rotate(&piles->pile_a, piles->len_a);
@@ -80,12 +81,12 @@ static void	sort_b_by_pushing_to_a(t_piles *piles, uint16_t len)
 	}
 	if (!is_pile_sorted(piles->pile_a, piles->len_a))
 	{
-		resolve_game(piles, len);
+		resolve_game(piles, len, 1);
 	}
 
 }
 
-void		resolve_game(t_piles *piles, uint16_t len)
+void		resolve_game(t_piles *piles, uint16_t len, int from_sort_b)
 {
 	if (is_game_finished(*piles))
 		return ;
@@ -97,8 +98,8 @@ void		resolve_game(t_piles *piles, uint16_t len)
 	else if (len > 2)
 	{
 		print_piles(piles);
-		push_smaller_integer_to_b(piles, len);
-		resolve_game(piles, len / 2 + len % 2);
+		push_smaller_integer_to_b(piles, len, from_sort_b);
+		resolve_game(piles, len / 2 + len % 2, from_sort_b);
 		FT_DEBUG("Depil : %i -> %i", len, len/2);
 		print_piles(piles);
 		sort_b_by_pushing_to_a(piles, len / 2);
