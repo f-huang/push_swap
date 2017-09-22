@@ -6,7 +6,7 @@
 #    By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 15:45:39 by fhuang            #+#    #+#              #
-#    Updated: 2017/09/15 16:03:56 by fhuang           ###   ########.fr        #
+#    Updated: 2017/09/23 00:23:18 by fhuang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,17 +25,19 @@ INCDIR	:=	include/
 LIBDIR	:=	libft/
 INSTRUCTDIR	:=	instructions/
 SRC		:=	$(SRCDIR)$(INSTRUCTDIR)push_to.c		\
+			$(SRCDIR)$(INSTRUCTDIR)fire_instruction.c	\
+			$(SRCDIR)$(INSTRUCTDIR)name_to_instruction.c	\
 			$(SRCDIR)$(INSTRUCTDIR)reverse_rotate.c	\
 			$(SRCDIR)$(INSTRUCTDIR)reverse_rotate_both_piles.c\
 			$(SRCDIR)$(INSTRUCTDIR)rotate.c			\
 			$(SRCDIR)$(INSTRUCTDIR)rotate_both_piles.c\
 			$(SRCDIR)$(INSTRUCTDIR)swap.c			\
 			$(SRCDIR)$(INSTRUCTDIR)swap_both_piles.c\
-			$(SRCDIR)call_instruction.c				\
 			$(SRCDIR)check_parameters.c				\
-			$(SRCDIR)destroy_piles.c				\
-			$(SRCDIR)init_piles.c					\
+			$(SRCDIR)finish_game.c				\
+			$(SRCDIR)init_game.c					\
 			$(SRCDIR)is_game_finished.c				\
+			$(SRCDIR)is_game_set.c				\
 			$(SRCDIR)is_pile_reverse_sorted.c		\
 			$(SRCDIR)is_pile_sorted.c
 OBJ		:=	$(SRC:$(SRCDIR)%.c=$(OBJDIR)%.o)
@@ -62,7 +64,8 @@ WHITE		= "\033[0;37m"
 DIRCHKER	:=	$(SRCDIR)$(PROG1)/
 OBJDIRCHKER	:=	$(OBJDIR)$(PROG1)/
 BINCHKER	:=	$(PROG1)
-SRCCHKER	:=	$(DIRCHKER)main.c
+SRCCHKER	:=	$(DIRCHKER)main.c	\
+				$(DIRCHKER)call_instruction.c
 OBJCHKER	:=	$(SRCCHKER:$(DIRCHKER)%.c=$(OBJDIRCHKER)%.o)
 # ===================
 
@@ -72,7 +75,7 @@ OBJDIRPSWAP	:=	$(OBJDIR)$(PROG2)/
 BINPSWAP	:=	$(PROG2)
 SRCPSWAP	:=	$(DIRPSWAP)main.c				\
 				$(DIRPSWAP)are_smaller_number_at_the_start.c\
-				$(DIRPSWAP)init_sorted_pile.c	\
+				$(DIRPSWAP)set_sorted_pile.c	\
 				$(DIRPSWAP)sort_three_items.c		\
 				$(DIRPSWAP)resolve_game.c		\
 				$(DIRPSWAP)get_tab_median.c		\

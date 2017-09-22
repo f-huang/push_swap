@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reverse_rotate.c                                   :+:      :+:    :+:   */
+/*   call_instruction.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/08 18:53:34 by fhuang            #+#    #+#             */
-/*   Updated: 2017/09/22 23:57:56 by fhuang           ###   ########.fr       */
+/*   Created: 2017/02/08 13:32:35 by fhuang            #+#    #+#             */
+/*   Updated: 2017/09/23 00:33:45 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game.h"
+#include "libft.h"
 
-void	reverse_rotate(t_pile *pile)
+int			call_instruction(t_game *game, const char *str)
 {
-	int		tmp;
-	int		i;
+	int	instruction_index;
 
-	if (!pile || pile->len < 2)
-		return ;
-	tmp = pile->list[pile->len - 1];
-	i = pile->len - 1;
-	while (i)
+	if (!str)
+		return (ERROR);
+	if ((instruction_index = name_to_instruction(str)) == -1)
 	{
-		pile->list[i] = pile->list[i - 1];
-		--i;
+		ft_putstr_fd(ERROR_STRING, 2);
+		return (ERROR);
 	}
-	pile->list[0] = tmp;
+	fire_instruction(game, (enum instruction)instruction_index, 0);
+	return (GOOD);
 }

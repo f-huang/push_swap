@@ -6,20 +6,20 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 16:17:23 by fhuang            #+#    #+#             */
-/*   Updated: 2017/02/09 18:58:32 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/09/22 00:31:36 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game.h"
 
-static int	is_pile_empty(int *pile, int len)
+static int	is_pile_empty(t_pile pile)
 {
-	return (!pile || len == 0);
+	return (!pile.list || pile.len == 0);
 }
 
-int			is_game_finished(t_piles piles)
+int			is_game_finished(t_game game)
 {
-	if (!is_pile_empty(piles.pile_b, piles.len_b))
+	if (!is_pile_empty(game.b))
 		return (ERROR);
-	return (is_pile_sorted(piles.pile_a, piles.len_a));
+	return (is_pile_sorted(game.a));
 }

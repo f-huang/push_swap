@@ -6,17 +6,19 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 18:50:55 by fhuang            #+#    #+#             */
-/*   Updated: 2017/03/25 17:56:55 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/09/23 00:40:16 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game.h"
 
-void	swap(int **pile, uint16_t len)
+void	swap(t_pile  *pile)
 {
-	if (!pile || len < 2)
+	int	tmp;
+
+	if (!pile || pile->len < 2)
 		return ;
-	len = (*pile)[0];
-	(*pile)[0] = (*pile)[1];
-	(*pile)[1] = len;
+	tmp = pile->list[0];
+	pile->list[0] = pile->list[1];
+	pile->list[1] = tmp;
 }

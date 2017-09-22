@@ -1,30 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_piles.c                                       :+:      :+:    :+:   */
+/*   set_sorted_pile.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/08 17:26:59 by fhuang            #+#    #+#             */
-/*   Updated: 2017/03/25 18:28:42 by fhuang           ###   ########.fr       */
+/*   Created: 2017/02/09 15:21:01 by fhuang            #+#    #+#             */
+/*   Updated: 2017/09/22 21:49:07 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game.h"
 #include "libft.h"
 
-void	init_piles(t_piles *piles, char **av)
+void	set_sorted_pile(t_pile *sorted, t_pile a, int max_size)
 {
 	int		i;
-	int		j;
+	int		tmp;
 
-	piles->pile_a = (int*)ft_memalloc(sizeof(int) * piles->len);
-	piles->pile_b = (int*)ft_memalloc(sizeof(int) * piles->len);
-	piles->len_a = piles->len;
-	piles->len_b = 0;
-	piles->sorted_pile = NULL;
+	if (!sorted)
+		return ;
+	sorted->list = (int*)ft_memdup(a.list, sizeof(int) * max_size);
 	i = 0;
-	j = 0;
-	while (av[i])
-		piles->pile_a[j++] = ft_atoi(av[i++]);
+	while (i < max_size - 1)
+	{
+		if (sorted->list[i] > sorted->list[i + 1])
+		{
+			tmp = sorted->list[i];
+			sorted->list[i] = sorted->list[i + 1];
+			sorted->list[i + 1] = tmp;
+			i = -1;
+		}
+		++i;
+	}
 }

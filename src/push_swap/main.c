@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 15:09:00 by fhuang            #+#    #+#             */
-/*   Updated: 2017/09/21 23:50:29 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/09/23 00:38:09 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,28 @@
 #include "push_swap.h"
 #include "libft.h"
 
-extern int total;
 int		main(int ac, char **av)
 {
-	t_piles	piles;
+	t_game	game;
+	uint16_t	max_size;
 
-	if (ac == 1 || !(av = check_parameters(av, &piles.len)))
+	if (ac == 1 || !(av = check_parameters(av, &max_size)))
 	{
 		!av ? ft_putstr_fd(ERROR_STRING, 2) : 0;
 		return (1);
 	}
-	init_piles(&piles, av);
-	init_sorted_pile(&piles.sorted_pile, piles.pile_a, piles.len);
-	if (piles.pile_a && piles.pile_b && piles.sorted_pile)
+	init_game(&game, av, max_size);
+	set_sorted_pile(&game.sorted, game.a, max_size);
+	if (is_game_set(game))
 	{
 		ft_putendlcol("_________START_________", RED);
-		print_piles(&piles);
+		print_piles(game);
 		ft_putendlcol("_______________________", RED);
-		resolve_game(&piles, piles.len, 0);
-		print_piles(&piles);
+		resolve_game(&game, game.a.len, 0);
+		print_piles(game);
 	}
-	FT_DEBUG("TOTAL = %i", total);
-	print_piles(&piles);
-	destroy_piles(&piles);
+	FT_DEBUG("TOTAL = %i", game.total_operations);
+	finish_game(&game);
 	ft_tabfree(&av);
 	return (0);
 }

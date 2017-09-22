@@ -6,14 +6,14 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 13:18:48 by fhuang            #+#    #+#             */
-/*   Updated: 2017/02/09 13:22:22 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/09/22 23:54:03 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game.h"
 
-void	swap_both_piles(t_piles *piles)
+void	swap_both_piles(t_pile *a, t_pile *b)
 {
-	swap(&piles->pile_a, piles->len_a);
-	swap(&piles->pile_b, piles->len_b);
+	swap(a);
+	swap(b);
 }

@@ -6,31 +6,31 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 13:08:41 by fhuang            #+#    #+#             */
-/*   Updated: 2017/03/25 17:56:38 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/09/23 00:30:21 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "game.h"
 
-void	push_to(int **src, int **dst, uint16_t *len_src, uint16_t *len_dst)
+void	push_to(t_pile *src, t_pile *dst)
 {
 	int		i;
 
-	if (!src || !dst || *len_src <= 0)
+	if (!src || !dst || src->len <= 0)
 		return ;
-	++(*len_dst);
-	i = *len_dst - 1;
+	++dst->len;
+	i = dst->len - 1;
 	while (i > 0)
 	{
-		(*dst)[i] = (*dst)[i - 1];
+		dst->list[i] = dst->list[i - 1];
 		--i;
 	}
-	(*dst)[0] = (*src)[0];
+	dst->list[0] = src->list[0];
 	i = 0;
-	while (i < *len_src - 1)
+	while (i < src->len - 1)
 	{
-		(*src)[i] = (*src)[i + 1];
+		src->list[i] = src->list[i + 1];
 		++i;
 	}
-	--(*len_src);
+	--src->len;
 }

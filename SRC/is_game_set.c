@@ -1,30 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reverse_rotate.c                                   :+:      :+:    :+:   */
+/*   is_game_set.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/08 18:53:34 by fhuang            #+#    #+#             */
-/*   Updated: 2017/09/22 23:57:56 by fhuang           ###   ########.fr       */
+/*   Created: 2017/09/22 00:19:49 by fhuang            #+#    #+#             */
+/*   Updated: 2017/09/22 21:47:13 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game.h"
 
-void	reverse_rotate(t_pile *pile)
+int	is_game_set(t_game game)
 {
-	int		tmp;
-	int		i;
-
-	if (!pile || pile->len < 2)
-		return ;
-	tmp = pile->list[pile->len - 1];
-	i = pile->len - 1;
-	while (i)
-	{
-		pile->list[i] = pile->list[i - 1];
-		--i;
-	}
-	pile->list[0] = tmp;
+	return (game.a.list && game.b.list && game.a.len > 0);
 }
