@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:07:05 by fhuang            #+#    #+#             */
-/*   Updated: 2017/09/28 16:12:15 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/09/28 18:27:39 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ static void	push_smaller_integer_to_b(t_game *game, uint16_t len, int from_sort_
 	count = 0;
 	while (count < len / 2 && nb_rotate < game->a.len)
 	{
+		// ft_putnbrendl(game->a.list[game->a.len - 1]);
+		ft_putnbrendl(game->a.list[0]);
 		if (game->a.list[0] < median)
 		{
 			FIRE(PB);
@@ -34,13 +36,13 @@ static void	push_smaller_integer_to_b(t_game *game, uint16_t len, int from_sort_
 		}
 		else
 		{
-			FIRE(RA);
+			FIRE(RRA);
 			nb_rotate++;
 		}
 	}
 	while (from_sort_b && nb_rotate)
 	{
-		FIRE(RRA);
+		FIRE(RA);
 		nb_rotate--;
 	}
 }
@@ -51,62 +53,47 @@ static void	sort_b_by_pushing_to_a(t_game *game, uint16_t len)
 	int		median;
 	int		nb_rotate;
 
-	nb_rotate = 0;
-	median = get_tab_median(game->b.list, len + len % 2);
-	count = 0;
-	FT_DEBUG("LEN = %i", len);
 	if (len == 1)
 		FIRE(PA);
 	else
 	{
+		nb_rotate = 0;
+		median = get_tab_median(game->b.list, len + len % 2);
+		count = 0;
 		while (count < len / 2 + len % 2 && nb_rotate - count < game->b.len)
 		{
-			if (game->b.list[0] >= median)
-			{
-				print_piles(*game);
+			print_piles(*game);
+			if (game->b.list[0] >= median && (++count))
 				FIRE(PA);
-				++count;
-			}
-			else if (len == 2)
+			else if (len == 2 && (++count))
 			{
-				print_piles(*game);
 				FIRE(SB);
 				FIRE(PA);
-				++count;
 			}
-			else
-			{
-				print_piles(*game);
+			else if (++nb_rotate)
 				FIRE(RB);
-				++nb_rotate;
-			}
 		}
-		while (nb_rotate)
-		{
+		while (nb_rotate--)
 			FIRE(RRB);
-			--nb_rotate;
-		}
-		FT_DEBUG("BEFORE : : size: %i, len: %i - count: %i - nb_rotate: %i", game->b.len, len, count, nb_rotate);
 		resolve_game(game, count, 1);
-		FT_DEBUG("AFTER : : size: %i, len: %i - count: %i - nb_rotate: %i", game->b.len, len, count, nb_rotate);
 		sort_b_by_pushing_to_a(game, len - count);
 	}
 }
 
 void		resolve_game(t_game *game, uint16_t len, int from_sort_b)
 {
+	int		half;
+
 	if (is_game_finished(*game))
 		return ;
 	if (len == 2 && game->a.list[0] > game->a.list[1])
 		FIRE(SA);
 	else if (len > 2)
 	{
-		// print_piles(*game);
+		half = len / 2;
+		print_piles(*game);
 		push_smaller_integer_to_b(game, len, from_sort_b);
-		resolve_game(game, len / 2  + len % 2, from_sort_b);
-		FT_DEBUG("Depil : %i -> %i", len, len/2);
-		// print_piles(*game);
-		sort_b_by_pushing_to_a(game, len / 2);
-		FT_DEBUG("-------------------");
+		resolve_game(game, half + len % 2, from_sort_b);
+		sort_b_by_pushing_to_a(game, half);
 	}
 }

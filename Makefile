@@ -6,7 +6,7 @@
 #    By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 15:45:39 by fhuang            #+#    #+#              #
-#    Updated: 2017/09/23 00:23:18 by fhuang           ###   ########.fr        #
+#    Updated: 2017/09/28 17:05:49 by fhuang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,7 +76,6 @@ BINPSWAP	:=	$(PROG2)
 SRCPSWAP	:=	$(DIRPSWAP)main.c				\
 				$(DIRPSWAP)are_smaller_number_at_the_start.c\
 				$(DIRPSWAP)set_sorted_pile.c	\
-				$(DIRPSWAP)sort_three_items.c		\
 				$(DIRPSWAP)resolve_game.c		\
 				$(DIRPSWAP)get_tab_median.c		\
 				$(DIRPSWAP)print_piles.c
@@ -91,8 +90,7 @@ all: libft push_swap checker
 	echo ""
 
 $(OBJDIR)%.o: $(SRCDIR)%.c $(CACHEF)
-	#CFLAGS
-	$(CC) -c $< -o $@ $(INC)
+	$(CC) $(CFLAGS) -c $< -o $@ $(INC)
 	printf $(GREEN)"|"$(EOC)
 
 $(CACHEF):
