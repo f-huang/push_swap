@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:07:05 by fhuang            #+#    #+#             */
-/*   Updated: 2017/09/28 22:42:03 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/09/29 00:21:28 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,46 @@
 #include "push_swap.h"
 
 # define FIRE(instruction) fire_instruction(game, instruction, 1)
+
+static void	foresee_moves(t_game *game)
+{
+	int		i;
+	int		swap_a;
+	int		swap_b;
+
+	swap_a = 0;
+	swap_b = 0;
+	if (game->a.len > 1 && game->a.list[0] > game->a.list[1])
+	{
+		i = 2;
+		swap_a = 1;
+		while (swap_a && i < game->b.len)
+		{
+			if (game->a.list[1] < game->b.list[i])
+				return ;
+			++i;
+		}
+		swap_a = 1;
+	}
+
+	if (game->b.len > 1 && game->b.list[0] < game->b.list[1])
+	{
+		i = 2;
+		swap_b = 1;
+		while (swap_b && i < game->b.len)
+		{
+			if (game->b.list[0] < game->b.list[i])
+				swap_b = 0;
+			++i;
+		}
+	}
+	if (swap_a && swap_b)
+		FIRE(SS);
+	else if (swap_a)
+		FIRE(SA);
+	else if (swap_b)
+		FIRE(SB);
+}
 
 static void	push_smaller_integer_to_b(t_game *game, uint16_t len, int from_sort_b)
 {
@@ -46,86 +86,20 @@ static void	push_smaller_integer_to_b(t_game *game, uint16_t len, int from_sort_
 		nb_rotate--;
 	}
 }
-// void	three_items_left_in_a(t_game *game)
-// {
-// 	if (game->a.len != 3 || is_pile_sorted(game->a))
-// 		return ;
-// 	else if (is_pile_reverse_sorted(game->a))
-// 	{
-// 		FIRE(SA);
-// 		FIRE(RRA);
-// 	}
-// 	else if (game->a.list[0] < game->a.list[1])
-// 	{
-// 		FIRE(RRA);
-// 		if (!is_pile_sorted(game->a) && game->a.list[0] < game->a.list[2])
-// 		{
-// 			FIRE(SA);
-// 		}
-// 	}
-// 	else
-// 	{
-// 		if (game->a.list[0] < game->a.list[2])
-// 			FIRE(SA);
-// 		else
-// 		{
-// 			FIRE(RA);
-// 		}
-// 	}
-// }
-//
-// void	three_items_left_in_b(t_game *game)
-// {
-// 	if (game->a.len != 3 || is_pile_sorted(game->a))
-// 		return ;
-// 	else if (is_pile_reverse_sorted(game->a))
-// 	{
-// 		FIRE(SB);
-// 		FIRE(RRB);
-// 	}
-// 	else if (game->a.list[0] < game->a.list[1])
-// 	{
-// 		FIRE(RRB);
-// 		if (!is_pile_sorted(game->a) && game->a.list[0] < game->a.list[2])
-// 		{
-// 			FIRE(SB);
-// 		}
-// 	}
-// 	else
-// 	{
-// 		if (game->a.list[0] < game->a.list[2])
-// 			FIRE(SB);
-// 		else
-// 		{
-// 			FIRE(RB);
-// 		}
-// 	}
-// }
-// static void	opti(t_game *game)
-// {
-// 	int	i;
-//
-// 	if (game->a.len > 1 && game->a.list[0] > game->a.list[1])
-// 	{
-// 		if (game->a.len == 3)
-// 			three_items_left_in_a(game);
-// 		else
-// 		{
-// 			i = 0;
-// 			while (i < game->b.len)
-// 			{
-// 				if (game->a.list[1] < game->b.list[i])
-// 					return ;
-// 				++i;
-// 			}
-// 			FIRE(SA);
-// 		}
-// 	}
-// 	if (game->b.len == 3)
-// 		three_items_left_in_b(game);
-// 	if (game->a.len == 3)
-// 		three_items_left_in_a(game);
-// }
+
+static int	is_there_numbers_greater_than_median_left(t_pile pile, int median)
+{
+	int		i;
+
+	i = 0;
+	while (i < pile.len)
+	{
+		if (pile.list[i] >= median)
+			return (GOOD);
+		++i;
+	}
+	return (ERROR);
+}
 
 static void	sort_b_by_pushing_to_a(t_game *game, uint16_t len)
 {
@@ -138,9 +112,9 @@ static void	sort_b_by_pushing_to_a(t_game *game, uint16_t len)
 	else
 	{
 		nb_rotate = 0;
-		median = get_tab_median(game->b.list, len + len % 2);
 		count = 0;
-		while (count < len / 2 + len % 2 && nb_rotate - count < game->b.len)
+		median = get_tab_median(game->b.list, len + len % 2);
+		while (is_there_numbers_greater_than_median_left(game->b, median) && count < len / 2 + len % 2 && nb_rotate - count < game->b.len)
 		{
 			// print_piles(*game);
 			if (game->b.list[0] >= median && (++count))
@@ -153,14 +127,15 @@ static void	sort_b_by_pushing_to_a(t_game *game, uint16_t len)
 				FIRE(SB);
 				FIRE(PA);
 			}
-			else if (++nb_rotate)
+			else if (++nb_rotate) {
+				// print_piles(*game);
 				FIRE(RB);
+			}
+			foresee_moves(game);
 		}
 		print_piles(*game);
-		FT_DEBUG("len: %i, nb_rotate: %i - count: %i - b.len: %i", len, nb_rotate, count, game->b.len);
-		if (len != nb_rotate)
-		while (count < game->b.len && nb_rotate--)
-		// while (nb_rotate--)
+		FT_DEBUG("len: %i, nb_rotate: %i - count: %i - b.len: %i - median: %i", len, nb_rotate, count, game->b.len, median);
+		while (game->b.len != nb_rotate && count < game->b.len && nb_rotate--)
 			FIRE(RRB);
 		if (!is_pile_sorted(game->a))
 			resolve_game(game, count, 1);
