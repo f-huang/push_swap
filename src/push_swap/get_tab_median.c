@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 17:41:11 by fhuang            #+#    #+#             */
-/*   Updated: 2017/09/14 18:58:45 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/09/28 21:44:27 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,8 @@ int		get_tab_median(int *tab, uint16_t len)
 	int		swap;
 	int		median;
 
-	tmp = ft_memalloc(sizeof(int) * len);
-	i = 0;
-	while (i < len)
-	{
-		tmp[i] = tab[i];
-		++i;
-	}
+	if (!(tmp = ft_intabndup(tab, 0, len)))
+		return (tab[0] ? tab[0] : 0);
 	i = 0;
 	while (i < len - 1)
 	{
