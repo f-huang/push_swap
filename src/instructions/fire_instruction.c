@@ -6,13 +6,15 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/23 00:18:07 by fhuang            #+#    #+#             */
-/*   Updated: 2017/09/23 00:33:34 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/09/28 16:08:13 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "game.h"
 
+
+#include "push_swap.h"
 void	fire_instruction(t_game *game, enum instruction instruction, int print)
 {
 	if (instruction == SA)
