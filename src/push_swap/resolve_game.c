@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:07:05 by fhuang            #+#    #+#             */
-/*   Updated: 2017/09/29 00:21:28 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/09/29 12:13:00 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,21 @@ static void	push_smaller_integer_to_b(t_game *game, uint16_t len, int from_sort_
 	while (from_sort_b && nb_rotate)
 	{
 		FIRE(RRA);
+		if (game->a.len > 1 && game->a.list[0] > game->a.list[1])
+		{
+			int sorted = 1;
+			swap(&game->a);
+			int i =2;
+			while (sorted && i < game->a.len - nb_rotate - 3)
+			{
+				if (game->a.list[i] > game->a.list[i + 1])
+					sorted = 0;
+				++i;
+			}
+			swap(&game->a);
+			if (sorted)
+				FIRE(SA);
+		}
 		nb_rotate--;
 	}
 }
@@ -90,15 +105,17 @@ static void	push_smaller_integer_to_b(t_game *game, uint16_t len, int from_sort_
 static int	is_there_numbers_greater_than_median_left(t_pile pile, int median)
 {
 	int		i;
+	int		count;
 
 	i = 0;
+	count = 0;
 	while (i < pile.len)
 	{
 		if (pile.list[i] >= median)
-			return (GOOD);
+			++count;
 		++i;
 	}
-	return (ERROR);
+	return (count);
 }
 
 static void	sort_b_by_pushing_to_a(t_game *game, uint16_t len)
@@ -106,6 +123,7 @@ static void	sort_b_by_pushing_to_a(t_game *game, uint16_t len)
 	int		count;
 	int		median;
 	int		nb_rotate;
+	int		nb_numbers_left;
 
 	if (len == 1)
 		FIRE(PA);
@@ -114,13 +132,11 @@ static void	sort_b_by_pushing_to_a(t_game *game, uint16_t len)
 		nb_rotate = 0;
 		count = 0;
 		median = get_tab_median(game->b.list, len + len % 2);
-		while (is_there_numbers_greater_than_median_left(game->b, median) && count < len / 2 + len % 2 && nb_rotate - count < game->b.len)
+		while ((nb_numbers_left = is_there_numbers_greater_than_median_left(game->b, median)) && count < len / 2 + len % 2 && nb_rotate - count < game->b.len)
 		{
-			// print_piles(*game);
 			if (game->b.list[0] >= median && (++count))
 			{
 				FIRE(PA);
-				// opti(game);
 			}
 			else if (len == 2 && (++count))
 			{
@@ -128,7 +144,6 @@ static void	sort_b_by_pushing_to_a(t_game *game, uint16_t len)
 				FIRE(PA);
 			}
 			else if (++nb_rotate) {
-				// print_piles(*game);
 				FIRE(RB);
 			}
 			foresee_moves(game);
