@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 13:32:35 by fhuang            #+#    #+#             */
-/*   Updated: 2017/09/28 17:20:35 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/09/29 15:09:35 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int			call_instruction(t_game *game, const char *str)
 
 	if (!str)
 		return (ERROR);
-		(void)game;
 	if ((instruction_index = name_to_instruction(str)) == -1)
 	{
 		ft_putstr_fd(ERROR_STRING, 2);

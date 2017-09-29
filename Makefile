@@ -6,7 +6,7 @@
 #    By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 15:45:39 by fhuang            #+#    #+#              #
-#    Updated: 2017/09/29 14:55:27 by fhuang           ###   ########.fr        #
+#    Updated: 2017/09/29 15:02:53 by fhuang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,6 +76,8 @@ BINPSWAP	:=	$(PROG2)
 SRCPSWAP	:=	$(DIRPSWAP)main.c				\
 				$(DIRPSWAP)resolve_game.c		\
 				$(DIRPSWAP)get_tab_median.c		\
+				$(DIRPSWAP)is_a_correctly_sorted.c	\
+				$(DIRPSWAP)is_there_numbers_greater_than_median.c	\
 				$(DIRPSWAP)swap_if_needed.c		\
 				$(DIRPSWAP)print_piles.c
 OBJPSWAP	:=	$(SRCPSWAP:$(DIRPSWAP)%.c=$(OBJDIRPSWAP)%.o)
