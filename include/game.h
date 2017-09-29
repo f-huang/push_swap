@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 12:10:39 by fhuang            #+#    #+#             */
-/*   Updated: 2017/09/29 15:25:03 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/09/29 16:02:41 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,21 +37,6 @@ enum			e_instruction
 	PA, PB
 };
 
-static const char	*g_instruction_names[] =
-{
-	[SA] = "sa",
-	[SB] = "sb",
-	[SS] = "ss",
-	[RA] = "ra",
-	[RB] = "rb",
-	[RR] = "rr",
-	[RRA] = "rra",
-	[RRB] = "rrb",
-	[RRR] = "rrr",
-	[PA] = "pa",
-	[PB] = "pb"
-};
-
 typedef struct	s_pile
 {
 	uint16_t	len;
@@ -76,6 +61,7 @@ typedef struct	s_game
 }				t_game;
 
 char			**check_parameters(char **av, uint16_t *len);
+const char		*get_instruction_name(enum e_instruction instruction);
 
 int				is_pile_sorted(t_pile pile);
 int				is_pile_reverse_sorted(t_pile pile);
