@@ -6,26 +6,38 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/29 14:49:57 by fhuang            #+#    #+#             */
-/*   Updated: 2017/09/29 15:10:37 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/09/29 16:55:42 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game.h"
+#include "push_swap.h"
 
-static int	need_to_swap_a(t_game *game)
+static int	need_to_swap_a(t_game *game, int nb_rotate)
 {
 	int		i;
+	int		swap_a;
 
 	if (game->a.len > 1 && game->a.list[0] > game->a.list[1])
 	{
+		swap_a = 1;
 		i = 2;
-		while (i < game->b.len)
+		while (swap_a && i < game->b.len)
 		{
 			if (game->a.list[1] < game->b.list[i])
-				return (0);
+				swap_a = 0;
 			++i;
 		}
-		return (1);
+		if (swap_a)
+			return (1);
+		i = 0;
+		while (swap_a && i < game->b.len)
+		{
+			if (game->a.list[0] < game->b.list[i])
+				return(0);
+			++i;
+		}
+		is_middle_of_a_is_sorted(game, nb_rotate);
 	}
 	return (0);
 }
@@ -47,13 +59,12 @@ static int	need_to_swap_b(t_pile b)
 	}
 	return (0);
 }
-
-void		swap_if_needed(t_game *game)
+void		swap_if_needed(t_game *game, int nb_rotate)
 {
 	int		swap_a;
 	int		swap_b;
 
-	swap_a = need_to_swap_a(game);
+	swap_a = need_to_swap_a(game, nb_rotate);
 	swap_b = need_to_swap_b(game->b);
 	if (swap_a && swap_b)
 		fire_instruction(game, SS, 1);

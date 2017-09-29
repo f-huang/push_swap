@@ -6,7 +6,7 @@
 #    By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 15:45:39 by fhuang            #+#    #+#              #
-#    Updated: 2017/09/29 15:57:14 by fhuang           ###   ########.fr        #
+#    Updated: 2017/09/29 17:46:43 by fhuang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ OBJ		:=	$(SRC:$(SRCDIR)%.c=$(OBJDIR)%.o)
 INC		:=	-I./$(INCDIR) -I./$(LIBDIR)$(INCDIR)
 LIBPATH	:=	-L./$(LIBDIR)lib -lft -lftprintf
 CACHEF	:=	.cache_exists
+RESULTF	:= result
 # ====================
 
 # ====== Colors ======
@@ -76,9 +77,12 @@ OBJDIRPSWAP	:=	$(OBJDIR)$(PROG2)/
 BINPSWAP	:=	$(PROG2)
 SRCPSWAP	:=	$(DIRPSWAP)main.c				\
 				$(DIRPSWAP)resolve_game.c		\
+				$(DIRPSWAP)get_biggest_number_in_pile.c		\
 				$(DIRPSWAP)get_tab_median.c		\
 				$(DIRPSWAP)is_a_correctly_sorted.c	\
+				$(DIRPSWAP)is_middle_of_a_is_sorted.c	\
 				$(DIRPSWAP)is_there_numbers_greater_than_median.c	\
+				$(DIRPSWAP)sort_a_if_three_items.c		\
 				$(DIRPSWAP)swap_if_needed.c		\
 				$(DIRPSWAP)print_piles.c
 OBJPSWAP	:=	$(SRCPSWAP:$(DIRPSWAP)%.c=$(OBJDIRPSWAP)%.o)
@@ -120,7 +124,7 @@ norme:
 
 clean:
 	make -C $(LIBDIR) clean
-	rm -rf $(OBJDIR) $(CACHEF)
+	rm -rf $(OBJDIR) $(CACHEF) $(RESULTF)
 	printf $(YELLOW)"All objects removed\n"$(EOC)
 
 fclean: clean
