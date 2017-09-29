@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/22 00:21:09 by fhuang            #+#    #+#             */
-/*   Updated: 2017/09/22 21:45:32 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/09/29 14:47:55 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 
 void	finish_game(t_game *game)
 {
-	if (game->sorted.list)
-		ft_memdel((void*)&game->sorted.list);
 	if (game->a.list)
 		ft_memdel((void*)&game->a.list);
 	if (game->b.list)

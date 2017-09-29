@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 15:09:00 by fhuang            #+#    #+#             */
-/*   Updated: 2017/09/28 18:03:08 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/09/29 14:48:01 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,9 @@ int		main(int ac, char **av)
 		return (1);
 	}
 	init_game(&game, av, max_size);
-	set_sorted_pile(&game.sorted, game.a, max_size);
 	if (is_game_set(game))
 	{
-		// ft_putendlcol("_________START_________", RED);
-		// print_piles(game);
-		// ft_putendlcol("_______________________", RED);
 		resolve_game(&game, game.a.len, 0);
-		// print_piles(game);
 	}
 	FT_DEBUG("[%s] TOTAL = %i",
 		is_game_finished(game) ? "OK" : "KO",

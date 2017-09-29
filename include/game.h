@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 12:10:39 by fhuang            #+#    #+#             */
-/*   Updated: 2017/09/23 00:33:41 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/09/29 14:47:16 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ typedef struct	s_game
 {
 	t_pile		a;
 	t_pile		b;
-	t_pile		sorted;
 	uint16_t	total_operations;
 }				t_game;
 

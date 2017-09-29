@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:07:05 by fhuang            #+#    #+#             */
-/*   Updated: 2017/09/29 12:13:00 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/09/29 14:55:05 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,46 +15,6 @@
 #include "push_swap.h"
 
 # define FIRE(instruction) fire_instruction(game, instruction, 1)
-
-static void	foresee_moves(t_game *game)
-{
-	int		i;
-	int		swap_a;
-	int		swap_b;
-
-	swap_a = 0;
-	swap_b = 0;
-	if (game->a.len > 1 && game->a.list[0] > game->a.list[1])
-	{
-		i = 2;
-		swap_a = 1;
-		while (swap_a && i < game->b.len)
-		{
-			if (game->a.list[1] < game->b.list[i])
-				return ;
-			++i;
-		}
-		swap_a = 1;
-	}
-
-	if (game->b.len > 1 && game->b.list[0] < game->b.list[1])
-	{
-		i = 2;
-		swap_b = 1;
-		while (swap_b && i < game->b.len)
-		{
-			if (game->b.list[0] < game->b.list[i])
-				swap_b = 0;
-			++i;
-		}
-	}
-	if (swap_a && swap_b)
-		FIRE(SS);
-	else if (swap_a)
-		FIRE(SA);
-	else if (swap_b)
-		FIRE(SB);
-}
 
 static void	push_smaller_integer_to_b(t_game *game, uint16_t len, int from_sort_b)
 {
@@ -146,7 +106,8 @@ static void	sort_b_by_pushing_to_a(t_game *game, uint16_t len)
 			else if (++nb_rotate) {
 				FIRE(RB);
 			}
-			foresee_moves(game);
+			swap_if_needed(game);
+			// foresee_moves(game);
 		}
 		print_piles(*game);
 		FT_DEBUG("len: %i, nb_rotate: %i - count: %i - b.len: %i - median: %i", len, nb_rotate, count, game->b.len, median);
@@ -170,8 +131,20 @@ void		resolve_game(t_game *game, uint16_t len, int from_sort_b)
 	{
 		half = len / 2;
 		print_piles(*game);
-		push_smaller_integer_to_b(game, len, from_sort_b);
-		resolve_game(game, half + len % 2, from_sort_b);
-		sort_b_by_pushing_to_a(game, half);
+		int	i;
+		int	a_is_correct = 1;
+		i = 0;
+		while (a_is_correct && i < game->b.len)
+		{
+			if (game->a.list[0] < game->b.list[i])
+				a_is_correct = 0;
+			++i;
+		}
+		if (!is_pile_sorted(game->a) || (is_pile_sorted(game->a) && !a_is_correct))
+		{
+			push_smaller_integer_to_b(game, len, from_sort_b);
+			resolve_game(game, half + len % 2, from_sort_b);
+			sort_b_by_pushing_to_a(game, half);
+		}
 	}
 }
