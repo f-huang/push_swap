@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:07:05 by fhuang            #+#    #+#             */
-/*   Updated: 2017/09/29 15:08:54 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/09/29 15:32:24 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "game.h"
 #include "push_swap.h"
 
-# define FIRE(instruction) fire_instruction(game, instruction, 1)
+#define FIRE(instruction) fire_instruction(game, instruction, 1)
 
 static void	is_middle_of_a_is_sorted(t_game *game, int nb_rotate)
 {
@@ -36,7 +36,6 @@ static void	is_middle_of_a_is_sorted(t_game *game, int nb_rotate)
 		if (sorted)
 			FIRE(SA);
 	}
-
 }
 
 static void	push_smaller_integer_to_b(t_game *game, uint16_t len, int from_sort_b)
@@ -53,6 +52,7 @@ static void	push_smaller_integer_to_b(t_game *game, uint16_t len, int from_sort_
 		if (game->a.list[0] < median)
 		{
 			FIRE(PB);
+			is_middle_of_a_is_sorted(game, nb_rotate);
 			count++;
 		}
 		else
@@ -76,7 +76,6 @@ static void	sort_b_by_pushing_to_a(t_game *game, uint16_t len)
 	int		count;
 	int		median;
 	int		nb_rotate;
-	int		nb_numbers_left;
 
 	if (len == 1)
 		FIRE(PA);
@@ -85,20 +84,18 @@ static void	sort_b_by_pushing_to_a(t_game *game, uint16_t len)
 		nb_rotate = 0;
 		count = 0;
 		median = get_tab_median(game->b.list, len + len % 2);
-		while ((nb_numbers_left = is_there_numbers_greater_than_median(game->b, median)) && count < len / 2 + len % 2 && nb_rotate - count < game->b.len)
+		while (is_there_numbers_greater_than_median(game->b, median) &&\
+			count < len / 2 + len % 2 && nb_rotate - count < game->b.len)
 		{
 			if (game->b.list[0] >= median && (++count))
-			{
 				FIRE(PA);
-			}
 			else if (len == 2 && (++count))
 			{
 				FIRE(SB);
 				FIRE(PA);
 			}
-			else if (++nb_rotate) {
+			else if (++nb_rotate)
 				FIRE(RB);
-			}
 			swap_if_needed(game);
 		}
 		print_piles(*game);

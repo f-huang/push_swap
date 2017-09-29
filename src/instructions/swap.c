@@ -6,13 +6,13 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 18:50:55 by fhuang            #+#    #+#             */
-/*   Updated: 2017/09/23 00:40:16 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/09/29 15:13:43 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game.h"
 
-void	swap(t_pile  *pile)
+void	swap(t_pile *pile)
 {
 	int	tmp;
 

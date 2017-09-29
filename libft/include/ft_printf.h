@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/02 23:13:27 by fhuang            #+#    #+#             */
-/*   Updated: 2017/02/08 12:36:45 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/09/29 15:24:42 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,20 +45,6 @@
 
 # define PUSH_BACK(c, n) push_char_back(link, str, c, n)
 # define PUSH_FRONT(c, n) push_char_front(link, str, c, n)
-
-// # define CHAR_BIT 8
-// # define CHAR_MIN -128
-// # define CHAR_MAX 127
-// # define UCHAR_MAX 255
-// # define SHRT_MIN -32768
-// # define SHRT_MAX 32767
-// # define USHRT_MIN 65535
-// # define INT_MIN -2147483648
-// # define INT_MAX 2147483647
-// # define UINT_MAX 4294967295
-// # define LONG_MIN -9223372036854775808
-// # define LONG_MAX +9223372036854775807
-// # define ULONG_MAX 18446744073709551615
 
 # define MASK1 "0xxxxxxx"
 # define MASK2 "110xxxxx10xxxxxx"
@@ -146,8 +132,10 @@ int						ft_printf_fd(int fd, const char *format, ...);
 */
 
 char					*ft_printf_itoa_base(int n, int base, bool is_uin);
-char					*ft_ctoa_base(char n, int base, bool is_uin, bool *is_neg);
-char					*ft_stoa_base(short n, int base, bool is_uin, bool *is_neg);
+char					*ft_ctoa_base(
+							char n, int base, bool is_uin, bool *is_neg);
+char					*ft_stoa_base(
+							short n, int base, bool is_uin, bool *is_neg);
 char					*ft_ltoa_base(long n, int base, bool is_uin);
 char					*ft_lltoa_base(long long n, int base, bool is_uin);
 

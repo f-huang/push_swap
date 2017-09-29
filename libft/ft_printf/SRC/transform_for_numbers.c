@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/13 11:46:12 by fhuang            #+#    #+#             */
-/*   Updated: 2016/07/12 01:00:36 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/09/29 15:18:29 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ static void		get_right_itoa(t_print *link, char **ret, int base, bool *neg)
 	if (U_VAR.uin == 0 && PRECISION == -1)
 		*ret = ft_strdup("");
 	else if (E_TYPE == T_INT || E_TYPE == T_UIN)
-		*ret = (ft_printf_itoa_base(U_VAR.uin, base, E_TYPE == T_INT ? false : true));
+		*ret = (ft_printf_itoa_base(U_VAR.uin, base, E_TYPE == T_INT ?\
+			false : true));
 	else if (E_TYPE == T_SHORT || E_TYPE == T_USHORT)
 		*ret = (ft_stoa_base(U_VAR.i, base, E_TYPE == T_SHORT ?\
 			false : true, neg));

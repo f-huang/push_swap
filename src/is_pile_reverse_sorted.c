@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:33:04 by fhuang            #+#    #+#             */
-/*   Updated: 2017/09/22 00:32:19 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/09/29 15:12:46 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	is_pile_reverse_ssorted(t_pile pile)
 	while (i < pile.len - 1)
 	{
 		if (pile.list[i] < pile.list[i + 1])
-			return (ERROR) ;
+			return (ERROR);
 		++i;
 	}
 	return (GOOD);

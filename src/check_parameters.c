@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 12:12:51 by fhuang            #+#    #+#             */
-/*   Updated: 2017/03/25 18:27:27 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/09/29 15:23:49 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,14 @@ char		**check_parameters(char **av, int *len)
 	int		tmp;
 	char	**tab;
 
-	i = 1;
+	i = 0;
 	tab = get_parameters(av + 1);
 	while (tab && tab[i])
 	{
 		if (!ft_isint(tab[i]) || !ft_isstrdigit(tab[i]))
 		{
-			ft_putendl(tab[i]);
-			return (NULL);}
+			return (NULL);
+		}
 		j = 1;
 		while (tab[j])
 		{

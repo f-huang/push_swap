@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/29 14:49:57 by fhuang            #+#    #+#             */
-/*   Updated: 2017/09/29 14:56:07 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/09/29 15:10:37 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,13 @@ static int	need_to_swap_b(t_pile b)
 	return (0);
 }
 
-void	swap_if_needed(t_game *game)
+void		swap_if_needed(t_game *game)
 {
 	int		swap_a;
 	int		swap_b;
 
 	swap_a = need_to_swap_a(game);
 	swap_b = need_to_swap_b(game->b);
-
 	if (swap_a && swap_b)
 		fire_instruction(game, SS, 1);
 	else if (swap_a)

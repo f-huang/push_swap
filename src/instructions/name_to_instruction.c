@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/22 00:50:32 by fhuang            #+#    #+#             */
-/*   Updated: 2017/09/23 00:05:05 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/09/29 15:22:34 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		name_to_instruction(const char *name)
 	i = 0;
 	while (i < NB_INSTRUCTIONS)
 	{
-		if (!ft_strcmp(name, instruction_names[i]))
+		if (!ft_strcmp(name, g_instruction_names[i]))
 			return (i);
 		++i;
 	}

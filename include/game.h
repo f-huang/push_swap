@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 12:10:39 by fhuang            #+#    #+#             */
-/*   Updated: 2017/09/29 14:47:16 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/09/29 15:25:03 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 
 # define NB_INSTRUCTIONS 11
 
-enum instruction
+enum			e_instruction
 {
 	SA = 0, SB, SS,
 	RA, RB, RR,
@@ -37,7 +37,7 @@ enum instruction
 	PA, PB
 };
 
-static const char *instruction_names[] =
+static const char	*g_instruction_names[] =
 {
 	[SA] = "sa",
 	[SB] = "sb",
@@ -75,7 +75,7 @@ typedef struct	s_game
 	uint16_t	total_operations;
 }				t_game;
 
-char**			check_parameters(char **av, uint16_t *len);
+char			**check_parameters(char **av, uint16_t *len);
 
 int				is_pile_sorted(t_pile pile);
 int				is_pile_reverse_sorted(t_pile pile);
@@ -88,7 +88,8 @@ void			finish_game(t_game *game);
 /*
 **	INSTRUCTIONS
 */
-void			fire_instruction(t_game *game, enum instruction instruction, int print);
+void			fire_instruction(
+					t_game *game, enum e_instruction instruction, int print);
 int				name_to_instruction(const char *name);
 
 void			push_to(t_pile *src, t_pile *dst);

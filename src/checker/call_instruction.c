@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 13:32:35 by fhuang            #+#    #+#             */
-/*   Updated: 2017/09/29 15:09:35 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/09/29 15:12:07 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ int			call_instruction(t_game *game, const char *str)
 		ft_putstr_fd(ERROR_STRING, 2);
 		return (ERROR);
 	}
-	fire_instruction(game, (enum instruction)instruction_index, 0);
+	fire_instruction(game, (enum e_instruction)instruction_index, 0);
 	return (GOOD);
 }
