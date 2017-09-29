@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/29 14:49:57 by fhuang            #+#    #+#             */
-/*   Updated: 2017/09/29 16:55:42 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/09/29 18:26:05 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	need_to_swap_a(t_game *game, int nb_rotate)
 		while (swap_a && i < game->b.len)
 		{
 			if (game->a.list[0] < game->b.list[i])
-				return(0);
+				return (0);
 			++i;
 		}
 		is_middle_of_a_is_sorted(game, nb_rotate);
@@ -59,6 +59,7 @@ static int	need_to_swap_b(t_pile b)
 	}
 	return (0);
 }
+
 void		swap_if_needed(t_game *game, int nb_rotate)
 {
 	int		swap_a;

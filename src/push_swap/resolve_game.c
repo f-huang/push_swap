@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:07:05 by fhuang            #+#    #+#             */
-/*   Updated: 2017/09/29 17:39:54 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/09/29 18:26:34 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ static void	push_smaller_integer_to_b(t_game *game, uint16_t len, int from_sort_
 			nb_rotate++;
 		}
 	}
-	// print_piles(*game);
-	// FT_DEBUG("len: %i, nb_rotate: %i - count: %i - a.len: %i", len, nb_rotate, count, game->a.len);
 	while (from_sort_b && nb_rotate)
 	{
 		FIRE(RRA);
@@ -54,6 +52,7 @@ static void	sort_b_by_pushing_to_a(t_game *game, uint16_t len)
 	int		count;
 	int		median;
 	int		nb_rotate;
+	int		biggest;
 
 	if (len == 1)
 		FIRE(PA);
@@ -67,7 +66,7 @@ static void	sort_b_by_pushing_to_a(t_game *game, uint16_t len)
 		{
 			if (game->b.list[0] >= median && (++count))
 			{
-				int biggest = get_biggest_number_in_pile(game->b);
+				biggest = get_biggest_number_in_pile(game->b);
 				if (game->b.len > 1 && game->b.list[0] < game->b.list[1] && game->b.list[1] == biggest)
 					FIRE(SB);
 				FIRE(PA);
@@ -81,8 +80,6 @@ static void	sort_b_by_pushing_to_a(t_game *game, uint16_t len)
 				FIRE(RB);
 			swap_if_needed(game, nb_rotate);
 		}
-		// print_piles(*game);
-		// FT_DEBUG("len: %i, nb_rotate: %i - count: %i - b.len: %i - median: %i", len, nb_rotate, count, game->b.len, median);
 		while (game->b.len != nb_rotate && count < game->b.len && nb_rotate--)
 			FIRE(RRB);
 		if (!is_pile_sorted(game->a))
@@ -104,7 +101,6 @@ void		resolve_game(t_game *game, uint16_t len, int from_sort_b)
 	else if (len > 2)
 	{
 		half = len / 2;
-		// print_piles(*game);
 		if (!is_pile_sorted(game->a) ||\
 			(is_pile_sorted(game->a) && !is_a_correctly_sorted(game)))
 		{

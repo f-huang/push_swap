@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/29 15:54:47 by fhuang            #+#    #+#             */
-/*   Updated: 2017/09/29 16:01:51 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/09/29 18:23:35 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 const char	*get_instruction_name(enum e_instruction instruction)
 {
-	static const char	*instruction_names[] =
-	{
+	static const char	*instruction_names[] = {
 		[SA] = "sa",
 		[SB] = "sb",
 		[SS] = "ss",
@@ -28,5 +27,6 @@ const char	*get_instruction_name(enum e_instruction instruction)
 		[PA] = "pa",
 		[PB] = "pb"
 	};
+
 	return (instruction_names[instruction]);
 }
