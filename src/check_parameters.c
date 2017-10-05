@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 12:12:51 by fhuang            #+#    #+#             */
-/*   Updated: 2017/10/05 13:54:20 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/10/05 14:36:12 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ static char	**get_parameters(char **av)
 	i = 0;
 	tmp = NULL;
 	tab = NULL;
+	if (!av[0])
+		tab = ft_memalloc(sizeof(char*) * 1);
 	while (av && av[i])
 	{
 		tmp = ft_strsplit(av[i], ' ');
