@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 20:20:27 by fhuang            #+#    #+#             */
-/*   Updated: 2017/09/29 17:21:15 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/10/05 11:49:59 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,12 @@
 int			main(int ac, char **av)
 {
 	t_game		game;
-	uint16_t	max_size;
+	int			max_size;
 	int			ret;
 	char		*line;
 
-	if (ac < 2 || !(av = check_parameters(av, &max_size)))
+	game.option = 0;
+	if (ac < 2 || !(av = check_parameters(&game, av, &max_size)))
 	{
 		!av ? ft_putstr_fd(ERROR_STRING, 2) : 0;
 		return (1);

@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 17:07:05 by fhuang            #+#    #+#             */
-/*   Updated: 2017/09/29 18:26:34 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/10/05 11:22:48 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 
 #define FIRE(instruction) fire_instruction(game, instruction, 1)
 
-static void	push_smaller_integer_to_b(t_game *game, uint16_t len, int from_sort_b)
+static void	push_smaller_integer_to_b(t_game *game, uint16_t len,\
+	int from_sort_b)
 {
 	int		median;
 	int		count;
@@ -27,17 +28,13 @@ static void	push_smaller_integer_to_b(t_game *game, uint16_t len, int from_sort_
 	count = 0;
 	while (count < len / 2 && nb_rotate - count < game->a.len)
 	{
-		if (game->a.list[0] < median)
+		if (game->a.list[0] < median && (++count))
 		{
 			FIRE(PB);
 			is_middle_of_a_is_sorted(game, nb_rotate);
-			count++;
 		}
-		else
-		{
+		else if (++nb_rotate)
 			FIRE(RA);
-			nb_rotate++;
-		}
 	}
 	while (from_sort_b && nb_rotate)
 	{
@@ -47,12 +44,40 @@ static void	push_smaller_integer_to_b(t_game *game, uint16_t len, int from_sort_
 	}
 }
 
+static int	sort_b(t_game *game, int *count, int len, int median)
+{
+	int		biggest;
+	int		nb_rotate;
+
+	nb_rotate = 0;
+	if (game->b.list[0] >= median)
+	{
+		(*count)++;
+		biggest = get_biggest_number_in_pile(game->b);
+		if (game->b.len > 1 && game->b.list[0] < game->b.list[1] &&\
+			game->b.list[1] == biggest)
+			FIRE(SB);
+		FIRE(PA);
+	}
+	else if (len == 2)
+	{
+		(*count)++;
+		FIRE(SB);
+		FIRE(PA);
+	}
+	else
+	{
+		nb_rotate++;
+		FIRE(RB);
+	}
+	return (nb_rotate);
+}
+
 static void	sort_b_by_pushing_to_a(t_game *game, uint16_t len)
 {
 	int		count;
 	int		median;
 	int		nb_rotate;
-	int		biggest;
 
 	if (len == 1)
 		FIRE(PA);
@@ -64,20 +89,7 @@ static void	sort_b_by_pushing_to_a(t_game *game, uint16_t len)
 		while (is_there_numbers_greater_than_median(game->b, median) &&\
 			count < len / 2 + len % 2 && nb_rotate - count < game->b.len)
 		{
-			if (game->b.list[0] >= median && (++count))
-			{
-				biggest = get_biggest_number_in_pile(game->b);
-				if (game->b.len > 1 && game->b.list[0] < game->b.list[1] && game->b.list[1] == biggest)
-					FIRE(SB);
-				FIRE(PA);
-			}
-			else if (len == 2 && (++count))
-			{
-				FIRE(SB);
-				FIRE(PA);
-			}
-			else if (++nb_rotate)
-				FIRE(RB);
+			nb_rotate += sort_b(game, &count, len, median);
 			swap_if_needed(game, nb_rotate);
 		}
 		while (game->b.len != nb_rotate && count < game->b.len && nb_rotate--)

@@ -6,7 +6,7 @@
 #    By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 15:45:39 by fhuang            #+#    #+#              #
-#    Updated: 2017/09/29 17:46:43 by fhuang           ###   ########.fr        #
+#    Updated: 2017/10/05 11:48:07 by fhuang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRC		:=	$(SRCDIR)$(INSTRUCTDIR)push_to.c		\
 			$(SRCDIR)$(INSTRUCTDIR)swap_both_piles.c\
 			$(SRCDIR)$(INSTRUCTDIR)get_instruction_name.c		\
 			$(SRCDIR)check_parameters.c				\
+			$(SRCDIR)get_options.c				\
 			$(SRCDIR)finish_game.c				\
 			$(SRCDIR)init_game.c					\
 			$(SRCDIR)is_game_finished.c				\

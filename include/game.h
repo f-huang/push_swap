@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 12:10:39 by fhuang            #+#    #+#             */
-/*   Updated: 2017/09/29 16:02:41 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/10/05 11:49:11 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@
 # include <inttypes.h>
 
 # define NB_INSTRUCTIONS 11
+
+# define OPTION_V (1 << 0)
+# define OPTION_C (1 << 1)
 
 enum			e_instruction
 {
@@ -57,11 +60,13 @@ typedef struct	s_game
 {
 	t_pile		a;
 	t_pile		b;
+	int			option;
 	uint16_t	total_operations;
 }				t_game;
 
-char			**check_parameters(char **av, uint16_t *len);
+char			**check_parameters(t_game *game, char **av, int *len);
 const char		*get_instruction_name(enum e_instruction instruction);
+int				get_options(t_game *game, char **av);
 
 int				is_pile_sorted(t_pile pile);
 int				is_pile_reverse_sorted(t_pile pile);

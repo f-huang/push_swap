@@ -1,31 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isstrdigit.c                                    :+:      :+:    :+:   */
+/*   get_options.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/08/11 15:28:55 by fhuang            #+#    #+#             */
-/*   Updated: 2017/10/05 11:56:05 by fhuang           ###   ########.fr       */
+/*   Created: 2017/10/05 11:34:56 by fhuang            #+#    #+#             */
+/*   Updated: 2017/10/05 12:19:02 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "game.h"
 
-int			ft_isstrdigit(char const *s)
+int		get_options(t_game *game, char **av)
 {
+	int		j;
 	int		i;
 
-	i = 0;
-	if (s[i] && (s[i] == '-' || s[i] == '+'))
-		i++;
-	if (!s[i])
-		return (0);
-	while (s[i])
+	i = 1;
+	while (av[i])
 	{
-		if (ft_isdigit(s[i]) == 0)
-			return (0);
-		i++;
+		if (ft_isstrdigit(av[i]) || av[i][0] != '-' ||\
+			(av[i][0] == '-' && !av[i][1]))
+			return (i);
+		j = 1;
+		while (av[i][j])
+		{
+			if (av[i][j] == 'v')
+				game->option |= OPTION_V;
+			else if (av[i][j] == 'c')
+				game->option |= OPTION_C;
+			else
+				return (-1);
+			j++;
+		}
+		(i)++;
 	}
-	return (1);
+	return (i);
 }

@@ -6,11 +6,12 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 12:12:51 by fhuang            #+#    #+#             */
-/*   Updated: 2017/09/29 15:23:49 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/10/05 12:18:54 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "game.h"
 
 static char	**ft_tabjoin(char **tab1, char **tab2)
 {
@@ -44,7 +45,7 @@ static char	**get_parameters(char **av)
 	i = 0;
 	tmp = NULL;
 	tab = NULL;
-	while (av[i])
+	while (av && av[i])
 	{
 		tmp = ft_strsplit(av[i], ' ');
 		tab = ft_tabjoin(tab, tmp);
@@ -57,15 +58,17 @@ static char	**get_parameters(char **av)
 	return (tab);
 }
 
-char		**check_parameters(char **av, int *len)
+char		**check_parameters(t_game *game, char **av, int *len)
 {
 	int		i;
 	int		j;
 	int		tmp;
 	char	**tab;
 
+	if ((i = get_options(game, av)) == -1)
+		return (NULL);
+	tab = get_parameters(av + i);
 	i = 0;
-	tab = get_parameters(av + 1);
 	while (tab && tab[i])
 	{
 		if (!ft_isint(tab[i]) || !ft_isstrdigit(tab[i]))
@@ -82,6 +85,6 @@ char		**check_parameters(char **av, int *len)
 		}
 		++i;
 	}
-	*len = ft_tablen(tab);
+	*len = tab ? ft_tablen(tab) : 0;
 	return (tab);
 }
