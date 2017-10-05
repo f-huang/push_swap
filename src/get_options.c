@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/05 11:34:56 by fhuang            #+#    #+#             */
-/*   Updated: 2017/10/05 12:19:02 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/10/05 13:51:43 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ int		get_options(t_game *game, char **av)
 		{
 			if (av[i][j] == 'v')
 				game->option |= OPTION_V;
-			else if (av[i][j] == 'c')
-				game->option |= OPTION_C;
 			else
 				return (-1);
 			j++;

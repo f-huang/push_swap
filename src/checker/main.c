@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 20:20:27 by fhuang            #+#    #+#             */
-/*   Updated: 2017/10/05 11:49:59 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/10/05 13:55:24 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ int			main(int ac, char **av)
 			if (ret == -1)
 				return (1);
 			call_instruction(&game, line);
-			if (line)
-				ft_strdel(&line);
+			line ? ft_strdel(&line) : 0;
 		}
 	ft_putendl(is_game_finished(game) ? "OK" : "KO");
 	finish_game(&game);

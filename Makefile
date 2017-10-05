@@ -6,7 +6,7 @@
 #    By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/07 15:45:39 by fhuang            #+#    #+#              #
-#    Updated: 2017/10/05 11:48:07 by fhuang           ###   ########.fr        #
+#    Updated: 2017/10/05 12:27:55 by fhuang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ SRC		:=	$(SRCDIR)$(INSTRUCTDIR)push_to.c		\
 			$(SRCDIR)check_parameters.c				\
 			$(SRCDIR)get_options.c				\
 			$(SRCDIR)finish_game.c				\
+			$(SRCDIR)print_piles.c				\
 			$(SRCDIR)init_game.c					\
 			$(SRCDIR)is_game_finished.c				\
 			$(SRCDIR)is_game_set.c				\
@@ -84,8 +85,7 @@ SRCPSWAP	:=	$(DIRPSWAP)main.c				\
 				$(DIRPSWAP)is_middle_of_a_is_sorted.c	\
 				$(DIRPSWAP)is_there_numbers_greater_than_median.c	\
 				$(DIRPSWAP)sort_a_if_three_items.c		\
-				$(DIRPSWAP)swap_if_needed.c		\
-				$(DIRPSWAP)print_piles.c
+				$(DIRPSWAP)swap_if_needed.c
 OBJPSWAP	:=	$(SRCPSWAP:$(DIRPSWAP)%.c=$(OBJDIRPSWAP)%.o)
 # ===================
 

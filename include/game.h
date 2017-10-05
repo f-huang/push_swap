@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 12:10:39 by fhuang            #+#    #+#             */
-/*   Updated: 2017/10/05 11:49:11 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/10/05 12:25:43 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct	s_game
 {
 	t_pile		a;
 	t_pile		b;
+	int			tty_fd;
 	int			option;
 	uint16_t	total_operations;
 }				t_game;
@@ -67,6 +68,8 @@ typedef struct	s_game
 char			**check_parameters(t_game *game, char **av, int *len);
 const char		*get_instruction_name(enum e_instruction instruction);
 int				get_options(t_game *game, char **av);
+
+void			print_piles(t_game game);
 
 int				is_pile_sorted(t_pile pile);
 int				is_pile_reverse_sorted(t_pile pile);

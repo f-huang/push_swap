@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 12:12:51 by fhuang            #+#    #+#             */
-/*   Updated: 2017/10/05 12:18:54 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/10/05 13:54:20 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,7 @@ char		**check_parameters(t_game *game, char **av, int *len)
 	while (tab && tab[i])
 	{
 		if (!ft_isint(tab[i]) || !ft_isstrdigit(tab[i]))
-		{
 			return (NULL);
-		}
 		j = 1;
 		while (tab[j])
 		{
