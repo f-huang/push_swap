@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 12:12:51 by fhuang            #+#    #+#             */
-/*   Updated: 2017/10/05 14:36:12 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/11/03 16:27:00 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,9 @@ char		**check_parameters(t_game *game, char **av, int *len)
 	int		tmp;
 	char	**tab;
 
-	if ((i = get_options(game, av)) == -1)
+	i = (tab = get_parameters(av + 1)) ? get_options(game, tab) : 1;
+	ft_tabfree(&tab);
+	if (i == -1)
 		return (NULL);
 	tab = get_parameters(av + i);
 	i = 0;

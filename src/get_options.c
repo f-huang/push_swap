@@ -6,7 +6,7 @@
 /*   By: fhuang <fhuang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/05 11:34:56 by fhuang            #+#    #+#             */
-/*   Updated: 2017/10/05 13:51:43 by fhuang           ###   ########.fr       */
+/*   Updated: 2017/11/03 16:27:13 by fhuang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		get_options(t_game *game, char **av)
 	int		i;
 
 	i = 1;
-	while (av[i])
+	while (av && av[i])
 	{
 		if (ft_isstrdigit(av[i]) || av[i][0] != '-' ||\
 			(av[i][0] == '-' && !av[i][1]))
